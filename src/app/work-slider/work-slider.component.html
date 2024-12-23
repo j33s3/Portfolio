@@ -1,0 +1,11 @@
+<div class="work-slider">
+    <div class="work-track">
+        <div *ngFor="let image of images" 
+                class="work-slide" 
+                [ngStyle]="{ transform: 'translateX(' + image.offset + '%)'}"
+                (mouseenter)="pauseSlider()"
+                (mouseleave)="resumeSlider()">
+            <img [src]="'assets/images/' + image.path" alt="Image" style="border-radius: 15px"/>
+        </div>
+    </div>
+</div>
