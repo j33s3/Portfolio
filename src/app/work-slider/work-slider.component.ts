@@ -1,4 +1,4 @@
-import { Component, OnInit, NgModule } from "@angular/core";
+import { Component, OnInit} from "@angular/core";
 import { CommonModule } from "@angular/common";
 
 @Component({
@@ -12,7 +12,7 @@ import { CommonModule } from "@angular/common";
 
 
 export class WorkSliderComponent implements OnInit {
-    images = [
+    images = [                                                                                          // List of images
         { path: 'SliderDefault.jpg', offset: 0},
         { path: 'SliderDefault.jpg', offset: 0},
         { path: 'SliderDefault.jpg', offset: 0},
@@ -21,34 +21,62 @@ export class WorkSliderComponent implements OnInit {
         { path: 'SliderDefault.jpg', offset: 0}
     ];
 
-    gap = 1;
-    imageWidth = 33.3333;
-    intervalId: any;
+    private rafId: number = 0;
+    private isPaused: boolean = false;
 
     constructor() { }
 
     ngOnInit(): void {
+        if (typeof window === 'undefined' || !('requestAnimationFram' in window)) {                     // Warn that the browser is not compatable
+            console.warn('requestAnimationFram is not available in this environment');
+        }
+
+    }
+
+    ngAfterViewInit(): void {                                                                           // Once view is loaded start the slider
         this.startSlider();
     }
 
-    startSlider() {
-        this.intervalId = setInterval(() => {
-            this.images.forEach((image, index) => {
-                image.offset -= (0.5 + this.gap / 100);
-                if (image.offset <= -109) {
-                    image.offset = 0;
-                }
-            });
-        }, 20); // Update every 20ms for smooth scrolling
+
+
+    startSlider() {                                                                                     
+        const updateImages = () => {                                                                    // recursivly calls the updateImagesOffset untill hover
+            if(this.isPaused) return;
+            this.updateImagesOffsets();
+            this.rafId = requestAnimationFrame(updateImages);
+        };
+        updateImages();
+    }
+
+
+    updateImagesOffsets() {
+        this.images = this.images.map((image) => {                                                      // Set the offset and if it is greater, move frame to beggining
+            image.offset -= 0.2;
+            if (image.offset <= -109) {
+                image.offset = 0;
+            }
+            return image;
+        });
     }
 
     pauseSlider() {
-        if (this.intervalId) {
-            clearInterval(this.intervalId);
+        if (this.rafId) {                                                                               // Cancel the animation and set status to paused
+            cancelAnimationFrame(this.rafId);
+            this.rafId = 0;
         }
+        this.isPaused = true;
     }
 
-    resumeSlider() {
-            this.startSlider();
+    resumeSlider() {                                                                                    // Set status to playing and call the startSlider function again
+        this.isPaused = false;
+        this.startSlider();
+    }
+
+
+    ngOnDestroy(): void {                                                                               // Reset Contents to clear memory
+        if(this.rafId) {
+            cancelAnimationFrame(this.rafId);
+        }
     }
 }
+

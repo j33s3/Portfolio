@@ -45,3 +45,12 @@
     opacity: 1;
     
 }
+
+@keyframes slide {
+    0% {
+     transform: translateX(+100%);                                             /*Start at the initial position*/
+    } 
+    100% {
+     transform: translateX(-100%);                                         /*Move left by one full width of the track*/
+    }
+ }
