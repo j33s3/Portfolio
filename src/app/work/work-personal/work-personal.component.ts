@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NavbarComponent } from '../../navbar/navbar.component';
 
 @Component({
   selector: 'app-work-personal',
   standalone: true,
-  imports: [],
-  template: `<h1>Hello There<h1>`,
-  // templateUrl: './work-personal.component.html',
-  // styleUrl: './work-personal.component.scss'
+  imports: [CommonModule, NavbarComponent],
+  templateUrl: './work-personal.component.html',
+  styleUrl: './work-personal.component.scss'
 })
 export class WorkPersonalComponent {
 

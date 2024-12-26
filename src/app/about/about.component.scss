@@ -1,0 +1,76 @@
+
+.about html, body { height: 100%}
+.about body {
+    background: radial-gradient(rgba(73,72,67, 1) 0%,                     /*Defines two of the same colors one is occupying the center and the other extends 35% of the radius*/
+    rgba(70,69,63, 1) 35%, #212121 100%)                                /*Third sets the final color. 100% means that is will occupy the edges*/
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*------  Ocean Background Animation  ------*/
+
+.ocean {
+    height: 5%;
+    width: 100%;                                                            
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: #444444;
+    background-color: transparent;
+}
+
+.wave {
+    background: url(../../assets/svg/wave.svg) repeat-x;
+    position: absolute;
+    width: 6400px;
+    top: -198px;
+    left: 0;
+    height: 198px;
+    transform: translate(0, 0, 0);
+    animation: wave 7s ease infinite;
+}
+
+.wave:nth-of-type(2) {
+    top: -168px;
+    animation: swell 5s ease-in-out infinite, wave 5s ease infinite;
+    opacity: 1;
+}
+
+.wave:nth-of-type(3) {
+    top: -100px;
+    animation: swell 10s ease-in-out infinite, wave 10s ease-in-out infinite;
+    opacity: .5;
+}
+
+@keyframes wave {
+    0% { margin-left: 0; }
+    100% { margin-left: -1600px; }
+}
+
+@keyframes swell {
+    0%, 100% {
+        transform: translate(0, -30px);
+    }
+    50% {
+        transform: translate(0, 50px);
+    }
+}

@@ -1,5 +1,9 @@
+.home-body{
+    background-color: black;
+}
+
 .header {
-    background: linear-gradient(rgba(0,0,0, .1), rgba(0,0,0, .4)),    /*This creates a gradient overlay goiing from very light black at the top to darker at the bottom*/
+    background: linear-gradient(rgba(0,0,0, .1), rgba(0,0,0, 0.4)),   /*This creates a gradient overlay goiing from very light black at the top to darker at the bottom*/
         url('../../assets/images/Image.jpg');                             /*This specifies the image for the background*/
     height: 100vh;                                                        /*This stands for 100% of viewport height*/
     background-size: cover;                                               /*Ensures that the image covers the entire header element scaling it proportionatly*/

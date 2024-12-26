@@ -3,7 +3,8 @@
 
 .nav {
     display: flex;
-    justify-content: flex-end;                                                /*Aligns the flex items horizontally at the end of container*/
+    justify-content: space-between;                                        /*Aligns the flex items horizontally at the end of container*/
+    align-items: center;
     padding: var(--gutter-normal) 0;                                          /*Adds vertical padding*/
 }
 
@@ -11,11 +12,16 @@
 .nav__items {
     display: flex;
     list-style: none;                                                         /*This removes default bullet points, number, or other markers from a list*/
+    width: 27%;
+    font-size: var(--font-size-normal);
 }
 
-.nav__items:not(:last-child) {                                                 /*This rule applies to all elements except the last item*/
+.nav__items--right:not(:last-child) {                                         /*This rule applies to all elements except the last item*/
     margin-right: var(--gutter-medium);                                       /*This keeps consequtive spacing besides the last*/
 }
+
+
+
 
 @media(max-width: 500px) {                                                    /*If screen width is less than 500px then center the nav bar*/
     .nav {
@@ -34,6 +40,8 @@
         font-size: var(--font-size-small);
     }
 }
+
+
 
 .nav__link {
     position: relative;
@@ -66,8 +74,7 @@
     background: var(--light-blue);
 }
 
-.dropdown {
-    position: relative;
+.dropdown {    position: relative;
 }
 
 .dropdown-menu {

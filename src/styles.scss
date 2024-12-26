@@ -33,6 +33,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     --gutter-small-1: 2.5rem;
     --gutter-small: 2rem;
 
+
+    --color-bg1: rgb(108, 0, 162);
+    --color-bg2: rgb(0, 17, 82);
+    --color1: 224, 11, 79;
+    --color2: 221, 74, 255;
+    --color3: 100, 220, 255;
+    --color4: 9, 237, 21;
+    --color5: 180, 180, 50;
+    --color-interactive: 255,140, 100;
+    --circle-size: 80%;
+    --blending: hard-light;
+
     --border-light: 1px solid rgb(36, 35, 35);
 }
 
@@ -56,7 +68,7 @@ body {
     font-weight: 400;
     color: var(--white);
     line-height: var(--line-height-normal);
-    background-color: var(--black);
+    // background-color: var(--black);
     overflow-x: hidden;                                                       /* Disables Horizontal Scrolling */
 }
 
@@ -324,39 +336,6 @@ p {
 /* --------------------------------------- */
 /* -----          Header             ----- */
 /* --------------------------------------- */
-
-// .header {
-//     background: linear-gradient(rgba(0,0,0, .1), rgba(0,0,0, .4)),    /*This creates a gradient overlay goiing from very light black at the top to darker at the bottom*/
-//         url('./assets/images/Image.jpg');                                 /*This specifies the image for the background*/
-//     height: 100vh;                                                        /*This stands for 100% of viewport height*/
-//     background-size: cover;                                               /*Ensures that the image covers the entire header element scaling it proportionatly*/
-//     background-position: center;                                          /*Centere the picture horizontally and vertically*/
-//     background-attachment: fixed;                                         /*This makes the background image fixed to a specific position*/
-//     font-size:  var(--font-size-normal);
-// }
-
-// .header__text {
-//     position: absolute;
-//     top: 50%;                                                             /*Moves the top edge of the element to 50% of height of its containing element*/
-//     transform: translateY(-50%);                                          /*This adjusts the position element moving it upwards 50% of its own height*/
-// }
-
-// .header__text p {                                                         /*This targets all <p> elements that are children of an element with .header__text class*/
-//     margin: 1.5rem 0 3.5rem;                                              /*Top margin 1.5rem, right margin 0rem, bottom margin 3.5rem (left is omitted so it is 0rem)*/
-//     max-width: var(--container-medium-width);
-//     font-family: 'Jost', sans-serif;
-//     font-size: var(--font-size-medium);
-// }
-
-// @media(max-width: 500px) {                                                /*If screen width is less than 500px align the text to the center*/
-//     .header {
-//         text-align: center;
-//     }
-
-//     .header__text p {
-//         transform: scale(.8);                                             /*If screen width is less than 500px scale <p> text to .8*/
-//     }
-// }
 
 
 /* --------------------------------------- */
