@@ -1,0 +1,12 @@
+1. Started with creating the angular application
+2. created the main style.css
+3. Created navbar with dropdown on the work button
+4. Worked on the Work slider
+5. Chose to move items into components, work slider, navbar, homescreen
+6. Created base path for other pages and learned to route them
+7. imported the navbar into seperate components
+8. learned how to use SVGs for creating background in about page
+9. Changed the about page to be compatable with varying screen sizes
+
+10. Created a docker container for Mongo, for developing database schema, connected container to local API that hosts assets on port 3000
+11. Fetched the description and picture for about page, Also setup sessionStorage for saving the mongoId and the description. The image is not saved due to size, instead the HTML loads the image dynamically via a URL + id.

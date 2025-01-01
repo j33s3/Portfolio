@@ -293,6 +293,44 @@ p {
     font-family: sans-serif;
 }
 
+
+.btn {
+    position: relative;
+    display: inline-block;
+    padding: 1rem 4.2rem;
+    text-decoration: none;
+    color: inherit;
+    background-color: transparent;
+    border: 1px solid var(--light-blue);
+    transition: color .2s;
+    font-size: 1.5rem;
+    text-align: left;
+}
+
+.btn:focus {
+    outline: none;
+}
+
+.btn::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 100%;
+    background: var(--white);
+    height: 100%;
+    z-index: -1;
+    transition: all 0.25s cubic-bezier(1, 0.68, 0.16, 0.9); 
+}
+
+.btn:hover::after,
+.btn:focus::after {
+    right: 0;
+    background: var(--light-blue);
+}
+
+
 /*------         Back to Top         ------*/
 
 .back-to-top {

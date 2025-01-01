@@ -13,7 +13,7 @@ import { WorkWorkComponent } from './work/work-work/work-work.component';
 export const routes: Routes = [
     { path: '', component: HomeComponent },                // Default route
 
-    { path: 'about', component: AboutComponent },          // About page route
+    { path: 'about', component: AboutComponent, runGuardsAndResolvers: 'always' },          // About page route
 
     { path: 'contact', component: ContactComponent},       // Contact page route
 

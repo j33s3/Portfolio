@@ -5,25 +5,62 @@
     rgba(70,69,63, 1) 35%, #212121 100%)                                /*Third sets the final color. 100% means that is will occupy the edges*/
 }
 
+.about h1 {
+    padding-top: 2%;
+}
 
 
 
 
 
+.about__content {
+    display: flex;
+    flex-direction:row-reverse;
+    align-items: center;
+    z-index: 10;
+}
+
+
+@media(max-width: 900px) {
+    .about__content {
+        flex-direction: column-reverse;
+        align-items: initial;
+    }
+}
+
+@media(min-height: 900px) {
+    .about__content {
+        padding-top: 5%;
+    }
+    .about h1 { 
+        padding-top: 10%
+    }
+}
 
 
 
+.about__photo-container {
+    margin: var(--gutter-normal);
+}
+
+.about__text {
+    font-size: var(--font-size-normal);
+    font-family: Roboto, 'Jost', sans-serif;
+    line-height: 150%;
+}
 
 
 
-
-
-
-
-
-
-
-
+@media(min-width: 901px) {
+    .about__text {
+        flex: 0 0 35%                                                     /* container will not grow with excess space and not shrink if there isnt enough, item is set to 35% */
+    }
+    
+    .about__photo-container {
+        flex: 1;                                                            /* picture will grow and shrink and the initial size of the item is 0% */
+        margin: 0 var(--gutter-huge) 0 0;                                   /* Top, Right, Bottom, Left*/
+    }
+}
 
 
 /*------  Ocean Background Animation  ------*/
@@ -39,7 +76,8 @@
 }
 
 .wave {
-    background: url(../../assets/svg/wave.svg) repeat-x;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='198'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='50%25' x2='50%25' y1='-10.959%25' y2='100%25'%3E%3Cstop stop-color='%23888888' stop-opacity='.25' offset='0%25'/%3E%3Cstop stop-color='%23333333' offset='100%25'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='url(%23a)' fill-rule='evenodd' d='M.005 121C311 121 409.898-.25 811 0c400 0 500 121 789 121v77H0s.005-48 .005-77z' transform='matrix(-1 0 0 1 1600 0)'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
     position: absolute;
     width: 6400px;
     top: -198px;
@@ -47,6 +85,7 @@
     height: 198px;
     transform: translate(0, 0, 0);
     animation: wave 7s ease infinite;
+    z-index: 50;
 }
 
 .wave:nth-of-type(2) {
@@ -59,6 +98,20 @@
     top: -100px;
     animation: swell 10s ease-in-out infinite, wave 10s ease-in-out infinite;
     opacity: .5;
+}
+
+
+@media(min-height: 1150px) {
+    .wave {
+        top: -250px;
+    }
+    .wave.wave:nth-of-type(2) {
+        top: -200px;
+    }
+    .wave.wave:nth-of-type(3) {
+        top: -150px;
+    }
+
 }
 
 @keyframes wave {
