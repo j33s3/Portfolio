@@ -1,0 +1,19 @@
+.item__container {
+    display: flex;
+    align-items: center;
+}
+
+@media(max-width: 901px) {
+    .item__container {
+        align-items: initial;
+        flex-direction: column-reverse;
+    }
+}
+
+.text__box {
+    flex: 0 0 35%;
+}
+
+.image__box {
+    flex: 1;
+}

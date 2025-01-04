@@ -9,6 +9,8 @@ import { WorkPersonalComponent } from './work/work-personal/work-personal.compon
 import { WorkSchoolComponent } from './work/work-school/work-school.component';
 import { WorkWorkComponent } from './work/work-work/work-work.component';
 
+import { WorkDetailsComponent } from './work/work-details/work-details.component';
+
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },                // Default route
@@ -20,5 +22,7 @@ export const routes: Routes = [
     { path: 'personal', component: WorkPersonalComponent },// Work Page routes
     { path: 'school', component: WorkSchoolComponent },
     { path: 'work', component: WorkWorkComponent },
+
+    { path: 'details/:id', component: WorkDetailsComponent},
 
 ];

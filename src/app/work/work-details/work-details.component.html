@@ -1,0 +1,17 @@
+<nav>
+    <app-navbar></app-navbar>
+</nav>
+
+
+<body class="work">
+    <div class="row">
+        <div class="item__container">
+            <div *ngFor="let item of project.projectStatuses" class="project__item">
+                <div class="text__box">
+                    <p> {{ item.statusDescription }} </p>
+                </div>
+                <img class="picutre__box" [src]="'http://localhost:3000/api/projects/image/' + (project._id + item._id)">
+            </div>
+        </div>
+    </div>
+</body>

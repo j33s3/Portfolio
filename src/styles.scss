@@ -68,7 +68,7 @@ body {
     font-weight: 400;
     color: var(--white);
     line-height: var(--line-height-normal);
-    // background-color: var(--black);
+    background-color: var(--black);
     overflow-x: hidden;                                                       /* Disables Horizontal Scrolling */
 }
 
@@ -200,7 +200,7 @@ p {
 }
 
 .more-btn {
-    position: relative;                                                       /*Positioning in relation to is normal flow*/
+    position: relative;                                                      /*Positioning in relation to is normal flow*/
     display: inline-block;                                                    /*Makes it act like text*/
     padding: 1rem 0;
     text-decoration: none;                                                    /*Removes underlining or effects from links <a>*/

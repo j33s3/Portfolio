@@ -5,4 +5,39 @@
 <header class="work">
     <h1>My personal Projects</h1>
 </header>
+<div class="vertical-container">
+    <div class="vertical-line"></div>
+    <!-- <div class="circle-break" data-date="2025-01-01"></div>
+    <div class="circle-break" data-date="2025-01-01"></div> -->
+</div>
 
+
+<body class="work">
+    <div class="row">
+        <div class="project-container">
+            <div *ngFor="let projects of data">
+                <div class="work__box">
+                    <div class="work__text">
+                        <p> {{ projects.projectDescription }} </p>
+                        <a [href]="'/details/' + projects._id" class="more-btn">Project Details</a>
+                    </div>
+                    <img class="work__picture"[src]="'http://localhost:3000/api/projects/image/' + projects._id" alt="Picture Desc" onerror="this.src='../../../assets/images/SliderDefault.jpg'"/>
+                    
+                </div>
+            </div>        
+        </div>
+    </div>
+
+    <!-- <div class="project-container">
+        <div class="work__box">
+            <div class="work__text">
+                <p>
+                    We are Here!
+                </p>
+            </div>
+            <div class="work__picture">
+                <img src="../../../assets/images/SliderDefault.jpg"/>
+            </div>
+        </div>
+    </div> -->
+</body>
