@@ -21,7 +21,7 @@ export const routes: Routes = [
 
     { path: 'personal', component: WorkPersonalComponent },// Work Page routes
     { path: 'school', component: WorkSchoolComponent },
-    { path: 'work', component: WorkWorkComponent },
+    { path: 'professional', component: WorkWorkComponent },
 
     { path: 'details/:id', component: WorkDetailsComponent},
 

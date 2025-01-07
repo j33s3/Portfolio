@@ -1,3 +1,29 @@
-<nav>
-    <app-navbar></app-navbar>
-</nav>
+
+
+<header class="header">
+    <nav>
+        <app-navbar></app-navbar>
+    </nav>
+
+    <div class="header__text-box row">
+        <div class="header__text">
+            <h1 class="heading-primary">
+                <span> School Work </span>
+            </h1>
+        </div>
+    </div>
+</header>
+
+<body class="work">
+    <div class="row">
+        <div class="project-container">
+            <div *ngFor="let projects of data">
+                <div class="work__text">
+                    <p> {{ projects.projectDescription }} </p>
+                    <a [href]="'/details/' + projects._id" class="more-btn">More Details</a>
+                </div>
+                <img class="work__picture" [src]="'http://localhost:3000/api/projects/image/' + projects._id" alt="Picture Desc" onerror="this.src='../../../assets/images/SliderDefault.jpg'"/>
+            </div>
+        </div>
+    </div>
+</body>
