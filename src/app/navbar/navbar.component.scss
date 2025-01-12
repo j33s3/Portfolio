@@ -3,9 +3,11 @@
 
 .nav {
     display: flex;
+    position: relative;
     justify-content: space-between;                                        /*Aligns the flex items horizontally at the end of container*/
     align-items: center;
     padding: var(--gutter-normal) 0;                                          /*Adds vertical padding*/
+    z-index: 1000;
 }
 
 
@@ -14,7 +16,6 @@
     list-style: none;                                                         /*This removes default bullet points, number, or other markers from a list*/
     width: 27%;
     font-size: var(--font-size-normal);
-    z-index: 100;
 }
 
 .nav__items--right:not(:last-child) {                                         /*This rule applies to all elements except the last item*/

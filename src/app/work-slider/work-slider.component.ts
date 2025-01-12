@@ -1,4 +1,4 @@
-import { Component, OnInit} from "@angular/core";
+import { Component, OnInit, ElementRef, AfterViewInit, ViewChild} from "@angular/core";
 import { CommonModule } from "@angular/common";
 
 @Component({
@@ -11,15 +11,14 @@ import { CommonModule } from "@angular/common";
 
 
 
-export class WorkSliderComponent implements OnInit {
-    images = [                                                                                          // List of images
-        { path: 'SliderDefault.jpg', offset: 0},
-        { path: 'SliderDefault.jpg', offset: 0},
-        { path: 'SliderDefault.jpg', offset: 0},
-        { path: 'SliderDefault.jpg', offset: 0},
-        { path: 'SliderDefault.jpg', offset: 0},
-        { path: 'SliderDefault.jpg', offset: 0}
-    ];
+export class WorkSliderComponent implements OnInit, AfterViewInit {
+
+
+
+
+    offset: number = 0;
+    data: any[] = [];
+    images: {ID: string, Name: string}[] = [];
 
     private rafId: number = 0;
     private isPaused: boolean = false;
@@ -27,11 +26,52 @@ export class WorkSliderComponent implements OnInit {
     constructor() { }
 
     ngOnInit(): void {
+        this.fetchData();
         if (typeof window === 'undefined' || !('requestAnimationFram' in window)) {                     // Warn that the browser is not compatable
             console.warn('requestAnimationFram is not available in this environment');
         }
 
     }
+
+    //**   Fetching Image IDs   **//
+
+    fetchData(): void {
+        const showcasePath = 'http://localhost:3000/api/projects/showcase';
+
+        fetch(showcasePath)
+        .then(response => {
+            if(!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            this.data = data;
+            sessionStorage.setItem('showcaseIDs', JSON.stringify(this.data));
+            this.addImages();
+        })
+        .catch(error => {
+            console.error('Error fetching data', error);
+        })
+    }
+
+
+
+
+    addImages() {
+
+
+        for( let image of this.data ) {                                                                 // This Places the initial pictures into the set
+            this.images.push({ID: image._id, Name: image.projectName})
+        }
+
+        for(let i = 0; i < 4; i++) {                                                                    // This places 4 extra images at the end for a smooth transition
+            this.images.push({ID: this.data[i]._id, Name: this.data[i].projectName})
+        }
+
+    }
+
+    //**   Animation   **//
 
     ngAfterViewInit(): void {                                                                           // Once view is loaded start the slider
         this.startSlider();
@@ -48,16 +88,23 @@ export class WorkSliderComponent implements OnInit {
         updateImages();
     }
 
-
     updateImagesOffsets() {
+        
+
+
+
+
         this.images = this.images.map((image) => {                                                      // Set the offset and if it is greater, move frame to beggining
-            image.offset -= 0.2;
-            if (image.offset <= -109) {
-                image.offset = 0;
+            this.offset -= 0.05;
+            
+            if (this.offset <= (this.images.length - 4) * -108.5) {
+                this.offset = 0;
             }
+
             return image;
         });
     }
+
 
     pauseSlider() {
         if (this.rafId) {                                                                               // Cancel the animation and set status to paused
@@ -79,4 +126,3 @@ export class WorkSliderComponent implements OnInit {
         }
     }
 }
-
