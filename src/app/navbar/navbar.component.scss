@@ -3,9 +3,11 @@
 
 .nav {
     display: flex;
+    flex: 0;
     position: relative;
     justify-content: space-between;                                        /*Aligns the flex items horizontally at the end of container*/
     align-items: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     padding: var(--gutter-normal) 0;                                          /*Adds vertical padding*/
     z-index: 1000;
 }
@@ -18,14 +20,14 @@
     font-size: var(--font-size-normal);
 }
 
-.nav__items--right:not(:last-child) {                                         /*This rule applies to all elements except the last item*/
-    margin-right: var(--gutter-medium);                                       /*This keeps consequtive spacing besides the last*/
+.nav__items:not(:last-child) {                                         /*This rule applies to all elements except the last item*/
+    margin-right: 15px;                                       /*This keeps consequtive spacing besides the last*/
 }
 
 
 
 
-@media(max-width: 500px) {                                                    /*If screen width is less than 500px then center the nav bar*/
+@media(max-width: 650px) {                                                    /*If screen width is less than 500px then center the nav bar*/
     .nav {
         justify-content: center;
     }

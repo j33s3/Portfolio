@@ -16,15 +16,21 @@
 
 <body class="work">
     <div class="row">
+        <section class="head-project">
+            <img [src]="'http://localhost:3000/api/projects/image/' + project._id"/>
+            <p>{{ project.projectDescription }}</p>
+        </section>
+
+
         <div class="item__container">
-            <div *ngFor="let item of project.projectStatuses">
-                <div class="project__item">
-                    <div class="text__box">
-                        <p> {{ item.statusDescription }} </p>
+                <div *ngFor="let item of project.projectStatuses" style="overflow-y: hidden;">
+                    <div class="project__item">
+                        <div class="text__box">
+                            <p> {{ item.statusDescription }} </p>
+                        </div>
+                        <img class="image__box" [src]="'http://localhost:3000/api/projects/image/' + (project._id + item._id)"/>
                     </div>
-                    <img class="image__box" [src]="'http://localhost:3000/api/projects/image/' + (project._id + item._id)">
                 </div>
-            </div>
         </div>
     </div>
 </body>

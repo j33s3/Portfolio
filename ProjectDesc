@@ -14,4 +14,8 @@
 13. Created a GIF for the project details header
 14. Created an image for the work personal/school/professional pages.
 15. Added routing to the school and professional pages to the API
-16. 
+16. Added the SVG wave to the contact page, and color coated
+17. Added dynamic routing to the work-slider from the api
+18. Fixed small screen compatibilit with work slider
+19. Fixed work pages, where body would start to scroll in correlation with Y overflow
+20. Moved the DB into the cloud,
