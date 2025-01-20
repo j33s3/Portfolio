@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../navbar/navbar.component';
+import { environment } from '../../../environment/environment';
 
 @Component({
   selector: 'app-work-school',
@@ -10,6 +11,8 @@ import { NavbarComponent } from '../../navbar/navbar.component';
   styleUrl: '../work.scss'
 })
 export class WorkSchoolComponent implements OnInit {
+  baseUrl = environment.baseUrl;
+
   data!: any[]
 
   ngOnInit(): void {
@@ -17,7 +20,7 @@ export class WorkSchoolComponent implements OnInit {
   }
 
   fetchData(): void {
-    const projectsPage = 'http://localhost:3000/api/projects/personal/';
+    const projectsPage = `${this.baseUrl}/projects/school`;
 
     fetch(projectsPage)
     .then(response => {

@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef, AfterViewInit, ViewChild} from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { environment } from "../../environment/environment";
 
 @Component({
     selector: 'app-work-slider',
@@ -12,6 +13,7 @@ import { CommonModule } from "@angular/common";
 
 
 export class WorkSliderComponent implements OnInit, AfterViewInit {
+    baseUrl = environment.baseUrl;
 
 
 
@@ -36,7 +38,7 @@ export class WorkSliderComponent implements OnInit, AfterViewInit {
     //**   Fetching Image IDs   **//
 
     fetchData(): void {
-        const showcasePath = 'http://localhost:3000/api/projects/showcase';
+        const showcasePath = `${this.baseUrl}/projects/showcase`;
 
         fetch(showcasePath)
         .then(response => {

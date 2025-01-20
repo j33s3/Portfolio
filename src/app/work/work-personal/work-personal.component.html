@@ -31,7 +31,7 @@
                         <p> {{ projects.projectDescription }} </p>
                         <a [href]="'/details/' + projects._id" class="more-btn">More Details</a>
                     </div>
-                    <img class="work__picture"[src]="'http://localhost:3000/api/projects/image/' + projects._id" alt="Picture Desc" onerror="this.src='../../../assets/images/SliderDefault.jpg'"/>
+                    <img class="work__picture"[src]=" baseUrl + '/projects/image/' + projects._id" alt="Picture Desc" onerror="this.src='../../../assets/images/SliderDefault.jpg'"/>
                     
                 </div>
             </div>

@@ -6,7 +6,7 @@
                 (mouseenter)="pauseSlider()"
                 (mouseleave)="resumeSlider()">
                 <a [href]="'/details/' + image.ID" class="full-link">
-                    <img [src]="'http://localhost:3000/api/projects/image/' + image.ID" alt="Image" style="border-radius: 15px"/>
+                    <img [src]=" baseUrl + '/projects/image/' + image.ID" alt="Image" style="border-radius: 15px"/>
                     <div class="overlay-text">{{ image.Name }}</div>
                 </a>
 

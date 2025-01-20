@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { Router, NavigationEnd } from '@angular/router';
+import { environment } from '../../environment/environment';
 
 @Component({
   selector: 'app-about',
@@ -11,6 +11,7 @@ import { Router, NavigationEnd } from '@angular/router';
   styleUrl: './about.component.scss'
 })
 export class AboutComponent implements OnInit{
+  baseUrl = environment.baseUrl;
 
   data: any[] = []
 
@@ -27,7 +28,7 @@ export class AboutComponent implements OnInit{
   }
 
   fetchData() : void {
-    const about = 'http://localhost:3000/api/about';                      // URL to the about contents
+    const about = `${this.baseUrl}/about`;                      // URL to the about contents
 
     fetch(about)
       .then(response => {                                                 // Check is the response is good

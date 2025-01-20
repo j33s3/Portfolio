@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../navbar/navbar.component';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from '../../../environment/environment';
 
 @Component({
   selector: 'app-work-details',
@@ -11,9 +12,10 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './work-details.component.scss'
 })
 export class WorkDetailsComponent implements OnInit {
+  baseUrl = environment.baseUrl;
 
   project: any;
-  private apiUrl = 'http://localhost:3000/api/projects/details'
+  private apiUrl = `${this.baseUrl}/projects/details`;
 
   constructor(private route: ActivatedRoute) {}
 
