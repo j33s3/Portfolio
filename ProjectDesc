@@ -24,3 +24,4 @@
 23. Added capstone section to school work, and changed the work container to contain skills and also added the github link.
 24. changed the waves in contact and about to use an external SVG to stay within th angular SCSS bounds
 25. Fixed scroll in work-details and added resume into about page
+26. Added the contact form in the contact page and links to my socials (LinkedIn and Github)

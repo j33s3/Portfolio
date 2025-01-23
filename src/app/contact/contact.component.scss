@@ -19,7 +19,7 @@ h1 {
     position: relative;
     display: flex;
     flex-direction: row-reverse;
-    align-items: center;
+    justify-content: space-between;
     align-items: center;
     overflow: hidden;
     width: 100vw;
@@ -29,7 +29,7 @@ h1 {
 
 @media (max-width: 900px) {
     .page__content {
-        flex-direction: column-reverse;
+        flex-direction: column;
         align-items: initial;
     }
 }
@@ -40,11 +40,7 @@ h1 {
         padding-top: 15%;
     }
 }
-.image__box {
-    position: relative;
-    margin: var(--gutter-normal);
-    z-index: 100;
-}
+
 
 
 .text__box {
@@ -144,4 +140,118 @@ h1 {
     bottom: -50%;
     animation: wave 4s ease infinite;
     z-index: 20;
+}
+
+
+/*  The email contact sheet  */
+
+.contact__box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 100;
+}
+
+.contact__box h3 {
+    margin: 4rem 0 4rem 0;
+    font-size: var(--font-size-medium-1);
+}
+
+.contact__form {
+    width: 600px;
+    padding: 20px;
+    background: #212121;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact__form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.contact__form label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+
+.contact__form input, .contact__form textarea {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    color: white;                                       // Font Color
+    background-color: #373737;                          // Input Background
+    border: 1px solid #141414;                          // Border Color
+    border-radius: 4px;
+}
+
+.contact__form button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.contact__form button:hover {
+    background: #0056b3;
+}
+
+/*  Alternative Contact Links */
+
+.work__links {
+    display: flex;
+    align-items: center;
+}
+
+.github {
+    margin-right: 10px;
+    mask: url('../../assets/images/github.svg') no-repeat;
+    -webkit-mask: url('../../assets/images/github.svg') no-repeat;
+}
+
+.linkedin {
+    margin-left: 10px;
+    mask: url('../../assets/images/linkedin.svg') no-repeat;
+    -webkit-mask: url('../../assets/images/linkedin.svg') no-repeat;
+}
+
+.github, .linkedin{
+    display: block;
+    height: 7rem;
+    width: 7rem;
+    transition: all .3s;
+    position: relative;
+
+
+    background: linear-gradient(to right, #414141 20%, #414141 80%);
+
+    mask-size: contain;
+    -webkit-mask-size: contain;
+}
+
+
+
+
+
+.linkedin:hover, .github:hover {
+    transform: scale(1.2);
+}
+
+.work__code-wrapper {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.work__code-wrapper:hover {
+    transform: scale(1.1);
 }
