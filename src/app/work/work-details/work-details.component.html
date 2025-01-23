@@ -5,7 +5,7 @@
 
     <div class="header__text-box row">
         <div class="header__text">
-            <h1 class="heading-primary">
+            <h1>
                 <span> {{ project.projectName }} </span>
             </h1>
         </div>
@@ -14,16 +14,55 @@
     
 </header>
 
+
+
+
 <body class="work">
     <div class="row">
-        <section class="head-project">
-            <img [src]=" baseUrl + '/projects/image/' + project._id"/>
-            <p>{{ project.projectDescription }}</p>
-        </section>
+        <div class="project-container">
+
+            <!-- Head project image and description -->
+            <section>
+                <div class="project__header-box">
+                    <img [src]="baseUrl + '/projects/image/' + project._id"/>
+                    <p>{{ project.projectDescription }}</p>
+                </div>
+            </section>
+
+            <!-- For Status image and description -->
+            <div *ngFor="let item of project.projectStatuses">
+                <div class="status__box">
+                    <div class="status__text">
+                        <p>{{ item.statusDescription }}</p>
+                    </div>
+
+                    <div class="status__picture">
+                        <img class="status__picture" [src]=" baseUrl + '/projects/image/' + (project._id + item._id)"/>
+                    </div>
+                </div>
+            </div>
 
 
-        <div class="item__container">
-                <div *ngFor="let item of project.projectStatuses" style="overflow-y: hidden;">
+        </div>
+    </div>
+</body>
+
+
+
+
+
+
+
+<!-- <body class="work">
+    <div class="row">
+        <div class="projects__container">
+            <section>
+                <div class="head-project">
+                    <img [src]=" baseUrl + '/projects/image/' + project._id"/>
+                    <p>{{ project.projectDescription }}</p>
+                </div>
+            </section>
+                <div *ngFor="let item of project.projectStatuses">
                     <div class="project__item">
                         <div class="text__box">
                             <p> {{ item.statusDescription }} </p>
@@ -31,6 +70,6 @@
                         <img class="image__box" [src]=" baseUrl + '/projects/image/' + (project._id + item._id)"/>
                     </div>
                 </div>
+            </div>
         </div>
-    </div>
-</body>
+</body> -->

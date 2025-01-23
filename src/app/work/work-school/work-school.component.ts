@@ -37,4 +37,8 @@ export class WorkSchoolComponent implements OnInit {
       console.error('Error fetching data', error);
     })
   }
+
+
+
+
 }

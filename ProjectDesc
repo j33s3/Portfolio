@@ -19,3 +19,8 @@
 18. Fixed small screen compatibilit with work slider
 19. Fixed work pages, where body would start to scroll in correlation with Y overflow
 20. Moved the DB into the cloud,
+21. Added API gateway and lambda function for tunneling DB assets
+22. Uploaded initial angular front end into S3 for hosting
+23. Added capstone section to school work, and changed the work container to contain skills and also added the github link.
+24. changed the waves in contact and about to use an external SVG to stay within th angular SCSS bounds
+25. Fixed scroll in work-details and added resume into about page

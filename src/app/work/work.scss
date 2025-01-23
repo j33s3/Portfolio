@@ -54,8 +54,7 @@ body {
     padding: 0;
     margin: 0;
     width: 100%;
-    height: 100%;
-    overflow-y: hidden;
+    height:fit-content;
 }
 
 // .scroll-container {
@@ -133,14 +132,6 @@ body {
     align-items: center;
     margin: 10rem 0 10rem 0;
     overflow-y: hidden;
-    // flex: 1;
-    // flex-direction: row;
-    // align-items: center;
-    // justify-content: space-between;
-    // width: 100%;
-    // height: 100%;
-    // object-fit: contain;
-      
 }
 
 @media(max-width: 900px) {
@@ -155,6 +146,7 @@ body {
 
 .work__text {
     padding-right: var(--gutter-normal);
+    font-weight: 400;
 }
 
 @media(min-width: 901px) {
@@ -164,13 +156,50 @@ body {
 }
 
 
+/*  Work Listing  */
+.work__list {
+    list-style-position: inside;
+    margin-bottom: 1rem;
+}
+
+/*   Work Links    */
+.work__links {
+    display: flex;
+    align-items: center;
+}
+
+.work__code {
+    display: block;
+    height: 7rem;
+    transition: all .3s;
+}
+
+.work__code:hover {
+    transform: scale(1.2);
+}
+
+.work__code-wrapper {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.work__code-wrapper:hover {
+    transform: scale(1.1);
+}
+
+.bottom__left-container {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-right: 20%;
+}
+
 
 /*   Image Box    */
 
 .work__picture {
     flex: 1 1 ;
-    // box-sizing: border-box;
-    // scale: 150%;
     height: auto;
     max-width: 650px;
 }
@@ -191,4 +220,32 @@ body {
     .work__picture {
         flex: 1 1 calc(50% - 10%);
     }
+}
+
+
+
+.project {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--gutter-normal) 0;
+}
+
+
+
+/*  Capstone Related entries  */
+
+.capstone__box {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    overflow-y: hidden;
+}
+
+// .capstone__title {
+// }
+
+.capstone__text {
+    line-height: var(--font-size-medium); 
+    max-width: 900px;
 }

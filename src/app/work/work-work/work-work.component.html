@@ -17,7 +17,45 @@
 <body class="work">
     <div class="row">
         <div class="scroll-container">
-            <div *ngFor="let projects of data">
+
+
+                 <!-- All Projects -->
+                 <div *ngFor="let projects of data">
+                    <div class="work__box">
+                        <div class="work__text">
+                            <h2>{{ projects.projectName }}</h2>
+                            <div class="project">
+                                <p class="project__description">{{ projects.projectBriefing }}</p>
+                            </div>
+    
+                            <div class="bottom__left-container">
+                                <div class="work__list">
+                                    <ul *ngFor="let skill of projects.projectSkills" >
+                                        <li>{{ skill.skill }}</li>
+                                    </ul>
+                                </div>
+
+
+                                <div class="work__links">
+                                    <a [href]=projects.projectLink title="View Source Code" target="_blank">
+                                        <div class="work__code-wrapper">
+                                            <object data="../../../assets/images/github.svg" type="image/svg+xml" style="pointer-events: none;" class="work__code" alt="GitHub"></object>
+                                        </div>
+                                    </a>
+                                </div>
+    
+                                <a [href]="'/details/' + projects._id" class="more-btn">More Details</a>
+                            </div>
+    
+                        </div>
+                        <div class="work__picture">
+                            <img class="work__picture" [src]=" baseUrl + '/projects/image/' + projects._id"  alt=projects.projectBriefing onerror="this.src='../../../assets/images/SliderDefault.jpg'"/>
+                        </div>
+                      </div>
+                 </div>
+
+
+            <!-- <div *ngFor="let projects of data">
                 <div class="work__box">
                     <div class="work__text">
                         <p> {{ projects.projectDescription }} </p>
@@ -25,7 +63,7 @@
                     </div>
                     <img [src]=" baseUrl + '/projects/image/' + projects._id", alt="Projects Picture" onerror="this.src='../../../assets/images/SliderDefault.jpg'"/>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </body>
