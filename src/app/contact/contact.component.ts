@@ -24,6 +24,8 @@ export class ContactComponent implements OnInit {
       const name = (document.getElementById('name') as HTMLInputElement)?.value;
       const email = (document.getElementById('email') as HTMLInputElement)?.value;
       const message = (document.getElementById('message') as HTMLInputElement)?.value;
+      form.reset();
+
 
       try {
         // Post a request and send the body
@@ -51,7 +53,6 @@ export class ContactComponent implements OnInit {
         console.error('Request failed: ', error);
         alert('Something went wrong. Please try again.')
       }
-      form.reset();
     });
   }
 }
