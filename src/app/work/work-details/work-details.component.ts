@@ -12,7 +12,7 @@ import { environment } from '../../../environment/environment';
   styleUrl: './work-details.component.scss'
 })
 export class WorkDetailsComponent implements OnInit {
-  baseUrl = environment.baseUrl;
+  baseUrl = environment.emailBaseUrl;
 
   project: any;
   private apiUrl = `${this.baseUrl}/projects/details`;

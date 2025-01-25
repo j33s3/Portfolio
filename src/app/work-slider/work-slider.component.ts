@@ -13,7 +13,7 @@ import { environment } from "../../environment/environment";
 
 
 export class WorkSliderComponent implements OnInit, AfterViewInit {
-    baseUrl = environment.baseUrl;
+    baseUrl = environment.dbBaseUrl;
 
 
 

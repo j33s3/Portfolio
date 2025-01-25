@@ -13,7 +13,7 @@ import { environment } from '../../../environment/environment';
 
 
 export class WorkPersonalComponent implements OnInit {
-  baseUrl = environment.baseUrl;
+  baseUrl = environment.dbBaseUrl;
 
     data: any[] = [];
 

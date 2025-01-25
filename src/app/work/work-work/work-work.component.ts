@@ -11,7 +11,7 @@ import { environment } from '../../../environment/environment';
   styleUrl: '../work.scss'
 })
 export class WorkWorkComponent implements OnInit{
-  baseUrl = environment.baseUrl;
+  baseUrl = environment.dbBaseUrl;
 
   data: any[] = []
 

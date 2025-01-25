@@ -11,7 +11,7 @@ import { environment } from '../../environment/environment';
   styleUrl: './about.component.scss'
 })
 export class AboutComponent implements OnInit{
-  baseUrl = environment.baseUrl;
+  baseUrl = environment.dbBaseUrl;
 
   data: any[] = []
 
