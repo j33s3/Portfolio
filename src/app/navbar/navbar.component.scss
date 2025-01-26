@@ -15,6 +15,7 @@
 
 .nav__items {
     display: flex;
+    color: white;
     list-style: none;                                                         /*This removes default bullet points, number, or other markers from a list*/
     width: 27%;
     font-size: var(--font-size-normal);

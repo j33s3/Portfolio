@@ -1,7 +1,7 @@
 html, body {
-    background: radial-gradient(#161616 0%,                     /*Defines two of the same colors one is occupying the center and the other extends 35% of the radius*/
-    #161616 35%, #101010 100%);
-    position: relative;
+    // background: radial-gradient(#161616 0%,                     /*Defines two of the same colors one is occupying the center and the other extends 35% of the radius*/
+    // #161616 35%, #101010 100%);
+    // position: relative;
 }
 
 h1 {
@@ -10,6 +10,15 @@ h1 {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     z-index: 100;
     margin-top: 10%;
+}
+
+.background__gradient {
+    display: block;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background: radial-gradient(#161616 0%,                     /*Defines two of the same colors one is occupying the center and the other extends 35% of the radius*/
+    #161616 35%, #101010 100%);
 }
 
 
@@ -23,14 +32,14 @@ h1 {
     align-items: center;
     overflow: hidden;
     width: 100vw;
-    height: 75vh;
+    height: auto;
     z-index: 100;
 }
 
 @media (max-width: 900px) {
     .page__content {
         flex-direction: column;
-        align-items: initial;
+        align-items: center;
     }
 }
 
@@ -45,10 +54,12 @@ h1 {
 
 .text__box {
     position: relative;
+    color: white;
     font-size: var(--font-size-normal);
     font-family: Roboto, 'Jost', sans-serif;
     line-height: 150%;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    padding: 3rem 0 3rem 3rem;
 }
 
 @media(min-width: 900px) {
@@ -72,25 +83,20 @@ h1 {
 
 .ocean__container {
     // height: 100%;
-    // width: 2.5%;                                                            
-    position: absolute;
+    // width: 100%;                                                           
+    position: fixed;
     bottom: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    height: inherit;
     overflow: hidden;
-
+    z-index: 10;
     // background: #444444;
     // background-color: transparent;
 }
 
 
-@media(max-width: 900px) {
-    .wave { right: 75vw }
-    .wave:nth-of-type(2){ right: 55vw }
-    .wave:nth-of-type(3){ right: 35vw }
-    .wave:nth-of-type(4){ right: 15vw }
-}
+
 
 
 @keyframes wave {
@@ -112,7 +118,7 @@ h1 {
     position: absolute;
     bottom: 0;
     right: 80vw;
-    transform: translate(0, 0);
+    transform: translateY(0, 0);
     animation: wave 8s ease infinite;
     z-index: 50;
 }
@@ -142,14 +148,27 @@ h1 {
     z-index: 20;
 }
 
+@media(max-width: 900px) {
+    .wave { right: 90vw }
+    .wave:nth-of-type(2){ right: 70vw }
+    .wave:nth-of-type(3){ right: 45vw }
+    .wave:nth-of-type(4){ right: 20vw }
+}
+
+@media(max-width: 550px) {
+    .wave { right: 90vw }
+    .wave:nth-of-type(2){ right: 60vw }
+    .wave:nth-of-type(3){ right: 40vw }
+    .wave:nth-of-type(4){ right: 5vw }
+}
 
 /*  The email contact sheet  */
 
 .contact__box {
-    display: flex;
+    display: flex;    
+    position: relative;
     flex-direction: column;
     align-items: center;
-    position: relative;
     z-index: 100;
 }
 
@@ -166,12 +185,20 @@ h1 {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+@media(max-width: 650px) {
+    .contact__form {
+        width: 400px;
+        padding: 15px;
+    }
+}
+
 .contact__form h2 {
     text-align: center;
     margin-bottom: 20px;
 }
 
 .contact__form label {
+    color: white;
     display: block;
     margin-top: 10px;
     font-weight: bold;
@@ -237,6 +264,7 @@ h1 {
 
     mask-size: contain;
     -webkit-mask-size: contain;
+    margin-bottom: 5rem;
 }
 
 
@@ -245,13 +273,4 @@ h1 {
 
 .linkedin:hover, .github:hover {
     transform: scale(1.2);
-}
-
-.work__code-wrapper {
-    display: inline-block;
-    transition: transform 0.3s ease;
-}
-
-.work__code-wrapper:hover {
-    transform: scale(1.1);
 }

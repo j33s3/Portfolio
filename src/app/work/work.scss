@@ -242,10 +242,67 @@ body {
     overflow-y: hidden;
 }
 
+iframe{
+    position: absolute;
+    width: 30%;
+    height: 27%;
+    transform: translateY(-50%);
+}
+
 // .capstone__title {
 // }
 
 .capstone__text {
     line-height: var(--font-size-medium); 
     max-width: 900px;
+}
+
+/*  For the Video Code Review  */
+
+.video__box {
+    display: flex;
+    align-items: center;
+    height: fit-content;
+    flex-direction: row;    
+    overflow-y: hidden;
+}
+
+@media(max-width: 1100px) {
+    .video__box {
+        flex-direction: column;
+    }
+}
+
+.video__picture-box{
+    display: flex;
+    position: block;
+    height: auto;
+    width: 600px;
+    aspect-ratio: 16 / 9;
+
+}
+
+.video__picture {
+    position:absolute;
+    width: inherit;
+    height: inherit;
+    aspect-ratio: inherit;
+    transform: translateY(0);
+}
+
+@media(max-width: 800px) {
+    .video__picture-box {
+        width: 400px;
+    }
+}
+
+.video__text {
+    font-weight: 400;
+    text-align: center;
+}
+
+@media(min-width: 901px) {
+    .video__text{
+        flex: 0 0 35%;                          // Short hand for grow shrink and basis, Item will not grow or shrink the size of the item is 35% vw
+    }
 }
