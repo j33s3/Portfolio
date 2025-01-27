@@ -4,7 +4,7 @@
     </nav>
 
     <div class="header__text-box row">
-        <div class="header__text">
+        <div *ngIf="project" class="header__text">
             <h1>
                 <span> {{ project.projectName }} </span>
             </h1>
@@ -23,24 +23,28 @@
 
             <!-- Head project image and description -->
             <section>
-                <div class="project__header-box">
+                <div *ngIf="project" class="project__header-box">
                     <img [src]="baseUrl + '/projects/image/' + project._id"/>
                     <p>{{ project.projectDescription }}</p>
                 </div>
             </section>
 
             <!-- For Status image and description -->
-            <div *ngFor="let item of project.projectStatuses">
-                <div class="status__box">
-                    <div class="status__text">
-                        <p>{{ item.statusDescription }}</p>
-                    </div>
-
-                    <div class="status__picture">
-                        <img class="status__picture" [src]=" baseUrl + '/projects/image/' + (project._id + item._id)"/>
+             <div *ngIf="project">
+                <div *ngFor="let item of project.projectStatuses">
+                    <div class="status__box">
+                        <div class="status__text">
+                            <h3 class="status__title">This is status name</h3>
+                            <span class="status__description">{{ item.statusDescription }}</span>
+                        </div>
+    
+                        <div class="status__picture">
+                            <img  [src]=" baseUrl + '/projects/image/' + (project._id + item._id)"/>
+                        </div>
                     </div>
                 </div>
-            </div>
+             </div>
+
 
 
         </div>

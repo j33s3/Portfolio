@@ -21,7 +21,6 @@ export class WorkDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     const projectId = this.route.snapshot.paramMap.get('id');
-    console.log(projectId);
     if(projectId) {
       this.fetchProjectDetails(projectId);
     }

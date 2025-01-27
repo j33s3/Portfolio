@@ -40,7 +40,6 @@ export class AboutComponent implements OnInit{
       .then(data => {                                                     // Set data to the class variable
         this.data = data;
         sessionStorage.setItem('aboutData', JSON.stringify(this.data));
-        console.log(this.data);
       })
       .catch(error => {                                                   // Upon reaching an error print it to console
         console.error('Error fetching data:', error);
