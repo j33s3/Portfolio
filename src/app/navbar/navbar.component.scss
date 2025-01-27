@@ -6,45 +6,60 @@
     flex: 0;
     position: relative;
     justify-content: space-between;                                        /*Aligns the flex items horizontally at the end of container*/
-    align-items: center;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     padding: var(--gutter-normal) 0;                                          /*Adds vertical padding*/
-    z-index: 1000;
+    z-index: 200;
 }
 
 
 .nav__items {
     display: flex;
+    position: relative;
     color: white;
     list-style: none;                                                         /*This removes default bullet points, number, or other markers from a list*/
-    width: 27%;
     font-size: var(--font-size-normal);
 }
 
-.nav__items:not(:last-child) {                                         /*This rule applies to all elements except the last item*/
-    margin-right: 15px;                                       /*This keeps consequtive spacing besides the last*/
+.nav__container-left, .nav__container-right {
+    display: flex;
 }
 
+.nav__container-right {
+    width: 30%;
+    justify-content: space-between;
+}
 
-
-
-@media(max-width: 650px) {                                                    /*If screen width is less than 500px then center the nav bar*/
+@media(max-width: 700px) {
     .nav {
         justify-content: center;
     }
-}
-
-@media(max-width: 500px) {                                                    /*If screen width is less than 400px then lessen the gutter*/
-    .nav__items:not(:last-child) {
-        margin-right: var(--gutter-normal);
+    .nav__container-right {
+        width: 40%;
+        padding-left: 5rem;
     }
 }
 
-@media(max-width: 300px) {
-    .nav {
-        font-size: var(--font-size-small);
+
+@media(max-width: 650px) {
+
+    .nav__container-right {
+        width: 220px; 
     }
 }
+
+// @media(max-width: 575px) {
+
+//     .nav__container-right {
+//         width: 50%;
+//     }
+// }
+
+// @media(max-width: 450px) {
+
+//     .nav__container-right {
+//         width: 60%;
+//     }
+// }
 
 
 
@@ -79,7 +94,8 @@
     background: var(--light-blue);
 }
 
-.dropdown {    position: relative;
+.dropdown {    
+    position: relative;
 }
 
 .dropdown-menu {
@@ -89,14 +105,19 @@
     left: 0;
     background-color: transparent;
     list-style: none;
-    padding: 10px 0;
+    padding: 5px 0;
     margin: 0;
     box-shadow: 0 4px 6px rgba(0,0,0, .1);
 }
 
 .dropdown-item {
     padding: 0 0;
-    background-color: rgba(0,0,0, .05);
+    background-color: transparent;
+}
+
+.dropdown-item:not(:last-child) {
+    margin: var(--gutter-small) 0;
+
 }
 
 .dropdown-item::after {
@@ -105,7 +126,6 @@
     height: 2px;
     width: 10rem;
     background: var(--light-blue);
-    margin: var(--gutter-small) 0;
 }
 
 .dropdown-link {
@@ -119,4 +139,9 @@
 
 .dropdown:hover .dropdown-menu {
     display: block;
+}
+  
+
+.dropdown-menu.show {
+    display: block
 }

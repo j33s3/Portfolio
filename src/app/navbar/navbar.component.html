@@ -1,27 +1,42 @@
-
 <div class="row">
-    <nav class="nav" role="navigation">
+  <nav class="nav" role="navigation">
 
 
-      <ul class="nav__items">
-        <li class="nav__items nav__items--left"><a href="/" class="nav__link">Home</a></li>
-      </ul>
+    <ul class="nav__container-left">
+      <li class="nav__items nav__items--left"><a href="/" class="nav__link">Home</a></li>
+    </ul>
 
-      <ul class="nav__items ">
-        <li class="nav__items dropdown">
+    <!-- If on mobile device -->
+    <ul class="nav__container-right">
+      <div *ngIf="isTouchDevice">
+        <li class="nav__items" (click)="toggleDropdown()">
           <a class="nav__link">Work</a>
-          <ul class="dropdown-menu nav">
+          <ul class="dropdown-menu" [class.show]="dropDownOpen">
             <li class="dropdown-item"><a href="/personal" class="dropdown-link">Personal</a></li>
             <li class="dropdown-item"><a href="/school" class="dropdown-link">School</a></li>
             <!-- <li class="dropdown-item"><a href="/professional" class="dropdown-link">Professional</a></li> -->
           </ul>
         </li>
-        <li class="nav__items"><a href="/about" class="nav__link" style="">About</a></li>
-        <li class="nav__items"><a href="/contact" class="nav__link">Contact</a></li>
-      </ul>
+      </div>
+
+      <!-- If on desktop device -->
+      <div *ngIf="!isTouchDevice">
+        <li class="nav__items dropdown">
+          <a class="nav__link">Work</a>
+          <ul class="dropdown-menu">
+            <li class="dropdown-item"><a href="/personal" class="dropdown-link">Personal</a></li>
+            <li class="dropdown-item"><a href="/school" class="dropdown-link">School</a></li>
+            <!-- <li class="dropdown-item"><a href="/professional" class="dropdown-link">Professional</a></li> -->
+          </ul>
+        </li>
+      </div>
+
+      <li class="nav__items"><a href="/about" class="nav__link" style="">About</a></li>
+      <li class="nav__items"><a href="/contact" class="nav__link">Contact</a></li>
+    </ul>
 
 
-    </nav>
-  </div>
+  </nav>
+</div>
 
   

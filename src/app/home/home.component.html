@@ -1,31 +1,34 @@
-<!-- <h1>{{ title }}</h1> -->
 
 <router-outlet></router-outlet>
 
 
 
-<header class="header" role="banner" id="top">
-    <nav>
-        <app-navbar></app-navbar>
-    </nav>
-    <div class="header__text-box row">
-        <div class="header__text">
-        <h1 class="heading-primary">
-            <span>Jesse Peterson</span>
-        </h1>
-        <p>I'm Jesse Peterson, a Web Developer based in Seattle, Washington. Explore my work below!</p>
-        
-        </div>
-    </div>
-</header>
+    <header class="header " role="banner" id="top">
+        <nav>
+            <app-navbar></app-navbar>
+        </nav>
+    
+            <div class="row">
+                <div class="header__text">
+                <h1 >
+                    <span>Jesse Peterson</span>
+                </h1>
+                <p>I'm Jesse Peterson, a Web Developer based in Seattle, Washington. Explore my work below!</p>
+                
+                </div>
+            </div>
+    
+    </header>
+    
+    <main class="home-body" role="main">
+        <section class="work" id="work">
+            <div class="row">
+            <h2>My Work</h2>
+            <app-work-slider></app-work-slider>
+            </div>
+        </section>
+    </main>
 
-<main class="home-body" role="main">
-    <section class="work" id="work">
-        <div class="row">
-        <h2>My Work</h2>
-        <app-work-slider></app-work-slider>
-        </div>
-    </section>
-</main>
+
 
     

@@ -6,6 +6,7 @@
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
+        background-repeat: no-repeat;
         font-size: var(font-size-normal);
 }
 
@@ -242,12 +243,6 @@ body {
     overflow-y: hidden;
 }
 
-iframe{
-    position: absolute;
-    width: 30%;
-    height: 27%;
-    transform: translateY(-50%);
-}
 
 // .capstone__title {
 // }
