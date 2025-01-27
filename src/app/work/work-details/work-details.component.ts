@@ -12,7 +12,7 @@ import { environment } from '../../../environment/environment';
   styleUrl: './work-details.component.scss'
 })
 export class WorkDetailsComponent implements OnInit {
-  baseUrl = environment.emailBaseUrl;
+  baseUrl = environment.dbBaseUrl;
 
   project: any;
   private apiUrl = `${this.baseUrl}/projects/details`;
@@ -21,10 +21,10 @@ export class WorkDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     const projectId = this.route.snapshot.paramMap.get('id');
+    console.log(projectId);
     if(projectId) {
       this.fetchProjectDetails(projectId);
     }
-    console.log(this.project);
   }
 
 

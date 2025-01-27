@@ -66,10 +66,6 @@ body{
     overflow-y: hidden;
 }
 
-.status__text {
-    padding-right: var(--gutter-normal);
-}
-
 .status__picture {
     display: block;
     height: auto;
@@ -114,10 +110,10 @@ body{
 
 @media(max-width: 600px) {
     .status__picture {
-        max-width: 200px;
+        max-width: 350px;
     }
     .project__header-box img {
-        max-width: 300px;
+        max-width: 400px;
     }
     .status__text {
         font-size: var(--font-size-small);
