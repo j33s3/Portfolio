@@ -1,16 +1,19 @@
-<div class="work-slider">
-    <!-- <div class="work-track"> -->
-        <div *ngFor="let image of images" 
-                class="work-slide" 
-                [ngStyle]="{ transform: 'translateX(' + offset + '%)'}"
-                (mouseenter)="pauseSlider()"
-                (mouseleave)="resumeSlider()">
-                <a [href]="'/details/' + image.ID" class="full-link">
-                    <img [src]=" baseUrl + '/projects/image/' + image.ID" alt="Image" style="border-radius: 15px"/>
-                    <div class="overlay-text">{{ image.Name }}</div>
-                </a>
-
-        </div>
-    <!-- </div> -->
+<div class="slider__container">
+    <div class="work-slider">
+        <!-- <div class="work-track"> -->
+            <div *ngFor="let image of images" 
+                    class="work-slide" 
+                    [ngStyle]="{ transform: 'translateX(' + offset + '%)'}"
+                    (mouseenter)="pauseSlider()"
+                    (mouseleave)="resumeSlider()">
+                    <a [href]="'/details/' + image.ID" class="full-link">
+                        <img [src]=" baseUrl + '/projects/image/' + image.ID" alt="Image" style="border-radius: 15px;"/>
+                        <div class="overlay-text">{{ image.Name }}</div>
+                    </a>
+    
+            </div>
+        <!-- </div> -->
+    </div>
 </div>
+
 

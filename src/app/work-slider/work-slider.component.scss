@@ -1,9 +1,15 @@
+.slider__container {
+    display: flex;
+    position: relative;
+    width: 100vw;
+    justify-content: center;
+}
 
 .work-slider {
     display: flex;
     position: relative;
     height: 500px;
-    width: 1180px;
+    max-width: 1080px;
     padding: 2rem;
     overflow-x: hidden;
 
@@ -11,10 +17,14 @@
     gap: 30px;
     transition: transform 0.3s linear;
     align-items: center;
+    z-index: 1;
 }
+
+
 
 .work-slide {
     flex: 0 0 calc(33.3333% - 30px);
+    width: 316.65px;
 }
 
 .work-slide:hover img {
@@ -77,6 +87,7 @@
     text-decoration: none;
     display: block;
     z-index: 1;
+    width: 310.00px;
  }
 
  .full-link img {

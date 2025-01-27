@@ -24,6 +24,7 @@ export class WorkSliderComponent implements OnInit, AfterViewInit {
 
     private rafId: number = 0;
     private isPaused: boolean = false;
+    private windowW: number = window.innerWidth;
 
     constructor() { }
 
@@ -99,7 +100,11 @@ export class WorkSliderComponent implements OnInit, AfterViewInit {
         this.images = this.images.map((image) => {                                                      // Set the offset and if it is greater, move frame to beggining
             this.offset -= 0.05;
             
-            if (this.offset <= (this.images.length - 4) * -108.5) {
+            // if (this.offset <= (this.images.length - 4) * -108.5) {
+            //     this.offset = 0;
+            // }
+
+            if (this.offset <= (this.images.length - 4) * -109.5) {
                 this.offset = 0;
             }
 

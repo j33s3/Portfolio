@@ -17,12 +17,11 @@ header, main {
 
 .header__text {
     display: flex;
-    width: inherit;
+    width: initial;
     color: white;
-    position: absolute;
+    position: relative;
     flex-direction: column;
-    top: 50%;                                                             /*Moves the top edge of the element to 50% of height of its containing element*/
-    transform: translateY(-50%);                                          /*This adjusts the position element moving it upwards 50% of its own height*/
+    transform: translateY(25vh);                                          /*This adjusts the position element moving it upwards 50% of its own height*/
 }
 
 .header__text p {    
