@@ -11,7 +11,7 @@ import { environment } from '../../../environment/environment';
   styleUrl: '../work.scss'
 })
 export class WorkSchoolComponent implements OnInit {
-  baseUrl = environment.dbBaseUrl;
+  // baseUrl = environment.dbBaseUrl;
 
   data!: any[]
 
@@ -20,22 +20,22 @@ export class WorkSchoolComponent implements OnInit {
   }
 
   fetchData(): void {
-    const projectsPage = `${this.baseUrl}/projects/school`;
+    // const projectsPage = `${this.baseUrl}/projects/school`;
 
-    fetch(projectsPage)
-    .then(response => {
-      if(!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then(data => {
-      this.data = data;
-      sessionStorage.setItem('schoolData', JSON.stringify(this.data));
-    })
-    .catch(error => {
-      console.error('Error fetching data', error);
-    })
+    // fetch(projectsPage)
+    // .then(response => {
+    //   if(!response.ok) {
+    //     throw new Error(`HTTP error! status: ${response.status}`);
+    //   }
+    //   return response.json();
+    // })
+    // .then(data => {
+    //   this.data = data;
+    //   sessionStorage.setItem('schoolData', JSON.stringify(this.data));
+    // })
+    // .catch(error => {
+    //   console.error('Error fetching data', error);
+    // })
   }
 
 

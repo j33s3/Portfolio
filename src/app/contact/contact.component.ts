@@ -11,7 +11,6 @@ import { environment } from '../../environment/environment';
   styleUrl: './contact.component.scss'
 })
 export class ContactComponent implements OnInit {
-  baseUrl = environment.emailBaseUrl;
 
   ngOnInit(): void {
 
@@ -27,32 +26,32 @@ export class ContactComponent implements OnInit {
       form.reset();
 
 
-      try {
-        // Post a request and send the body
-        const response = await fetch (
-          `${this.baseUrl}/contact`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ name, email, message })
-          }
-        );
+      // try {
+      //   // Post a request and send the body
+      //   const response = await fetch (
+      //     `${this.baseUrl}/contact`, {
+      //       method: 'POST',
+      //       headers: {
+      //         'Content-Type': 'application/json',
+      //       },
+      //       body: JSON.stringify({ name, email, message })
+      //     }
+      //   );
 
-        // Track the response
-        const result = await response.json();
+      //   // Track the response
+      //   const result = await response.json();
         
 
-        // If success notify, else notify error
-        if(response.ok) {
-          alert('Message sent successfully!');
-        } else {
-          alert('Error: ' + result.error);
-        }
-      } catch (error) {
-        console.error('Request failed: ', error);
-        alert('Something went wrong. Please try again.')
-      }
+      //   // If success notify, else notify error
+      //   if(response.ok) {
+      //     alert('Message sent successfully!');
+      //   } else {
+      //     alert('Error: ' + result.error);
+      //   }
+      // } catch (error) {
+      //   console.error('Request failed: ', error);
+      //   alert('Something went wrong. Please try again.')
+      // }
     });
   }
 }

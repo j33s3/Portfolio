@@ -1,6 +1,8 @@
 import { Component, OnInit, ElementRef, AfterViewInit, ViewChild} from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { environment } from "../../environment/environment";
+import { ApiService } from "../services/api.service";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
     selector: 'app-work-slider',
@@ -13,7 +15,7 @@ import { environment } from "../../environment/environment";
 
 
 export class WorkSliderComponent implements OnInit, AfterViewInit {
-    baseUrl = environment.dbBaseUrl;
+    imageUrl: string | null = null;
 
 
 
@@ -26,36 +28,39 @@ export class WorkSliderComponent implements OnInit, AfterViewInit {
     private isPaused: boolean = false;
     private windowW: number = window.innerWidth;
 
-    constructor() { }
+    constructor(private apiService: ApiService) { }
 
     ngOnInit(): void {
-        this.fetchData();
+        const cachedData = sessionStorage.getItem('showcaseIDs');
+        // if(cachedData) {
+        //     this.data = JSON.parse(cachedData);
+        // } else {
+
+        // }
+
+        /* WORKING CALL */
+        // this.apiService.getProjects_Showcase()
+        // .then(data => {
+        //     this.data = data;
+        //     sessionStorage.setItem('showcaseIDs', JSON.stringify(this.data));
+        // })
+        // .catch(error => {
+        //     console.error('There was an error gathering showcases: ', error);
+        // })
+
+        this.apiService.getProjects_Image('6792bc38d4474f741c193792')
+            .then(data => {
+                this
+            })
+            .catch(error => {
+                console.error('There was an error gathering the image: ', error);
+            })
+
+
         if (typeof window === 'undefined' || !('requestAnimationFram' in window)) {                     // Warn that the browser is not compatable
             console.warn('requestAnimationFram is not available in this environment');
         }
 
-    }
-
-    //**   Fetching Image IDs   **//
-
-    fetchData(): void {
-        const showcasePath = `${this.baseUrl}/projects/showcase`;
-
-        fetch(showcasePath)
-        .then(response => {
-            if(!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            this.data = data;
-            sessionStorage.setItem('showcaseIDs', JSON.stringify(this.data));
-            this.addImages();
-        })
-        .catch(error => {
-            console.error('Error fetching data', error);
-        })
     }
 
 

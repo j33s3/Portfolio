@@ -11,7 +11,7 @@ import { environment } from '../../../environment/environment';
   styleUrl: '../work.scss'
 })
 export class WorkWorkComponent implements OnInit{
-  baseUrl = environment.dbBaseUrl;
+  // baseUrl = environment.dbBaseUrl;
 
   data: any[] = []
 
@@ -21,22 +21,22 @@ export class WorkWorkComponent implements OnInit{
 
 
   fetchData(): void {
-    const projectsPage = `${this.baseUrl}/projects/personal`;
+    // const projectsPage = `${this.baseUrl}/projects/personal`;
 
-    fetch(projectsPage)
-    .then(response => {
-      if(!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then(data => {
-      this.data = data;
-      sessionStorage.setItem('professionalData', JSON.stringify(this.data));
-    })
-    .catch(error => {
-      console.error('Error fetching data', error);
-    })
+    // fetch(projectsPage)
+    // .then(response => {
+    //   if(!response.ok) {
+    //     throw new Error(`HTTP error! status: ${response.status}`);
+    //   }
+    //   return response.json();
+    // })
+    // .then(data => {
+    //   this.data = data;
+    //   sessionStorage.setItem('professionalData', JSON.stringify(this.data));
+    // })
+    // .catch(error => {
+    //   console.error('Error fetching data', error);
+    // })
 
   }
 

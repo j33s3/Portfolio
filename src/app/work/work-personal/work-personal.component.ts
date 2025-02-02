@@ -13,7 +13,7 @@ import { environment } from '../../../environment/environment';
 
 
 export class WorkPersonalComponent implements OnInit {
-  baseUrl = environment.dbBaseUrl;
+  // baseUrl = environment.dbBaseUrl;
 
     data: any[] = [];
 
@@ -24,22 +24,22 @@ export class WorkPersonalComponent implements OnInit {
 
 
   fetchData(): void {
-    const projectsPage = `${this.baseUrl}/projects/personal`;
+    // const projectsPage = `${this.baseUrl}/projects/personal`;
     
-    fetch(projectsPage)
-    .then(response => {
-      if(!response.ok){
-        throw new Error(`HTTP error! status: ${response.status}`)
-      }
-      return response.json();
-    })
-    .then(data => {
-      this.data = data;
-      sessionStorage.setItem('personalData', JSON.stringify(this.data));
-    })
-    .catch(error => {
-      console.error('Error fetching data', error);
-    })
+    // fetch(projectsPage)
+    // .then(response => {
+    //   if(!response.ok){
+    //     throw new Error(`HTTP error! status: ${response.status}`)
+    //   }
+    //   return response.json();
+    // })
+    // .then(data => {
+    //   this.data = data;
+    //   sessionStorage.setItem('personalData', JSON.stringify(this.data));
+    // })
+    // .catch(error => {
+    //   console.error('Error fetching data', error);
+    // })
     
   }
 

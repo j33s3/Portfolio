@@ -12,10 +12,10 @@ import { environment } from '../../../environment/environment';
   styleUrl: './work-details.component.scss'
 })
 export class WorkDetailsComponent implements OnInit {
-  baseUrl = environment.dbBaseUrl;
+  // baseUrl = environment.dbBaseUrl;
 
   project: any;
-  private apiUrl = `${this.baseUrl}/projects/details`;
+  // private apiUrl = `${this.baseUrl}/projects/details`;
 
   constructor(private route: ActivatedRoute) {}
 
@@ -28,20 +28,20 @@ export class WorkDetailsComponent implements OnInit {
 
 
   fetchProjectDetails(id: string): void {
-    fetch(`${this.apiUrl}/${id}`)
-    .then(response => {
-      if(!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
-      }
-      return response.json();
-    })
-    .then(data => {
-      this.project = data;
-      sessionStorage.setItem(`${this.project.projectName}__Data`, JSON.stringify(this.project));
-    })
-    .catch(error => {
-      console.error('Error fetching data', error);
-    })
+    // fetch(`${this.apiUrl}/${id}`)
+    // .then(response => {
+    //   if(!response.ok) {
+    //     throw new Error(`HTTP error! status: ${response.status}`)
+    //   }
+    //   return response.json();
+    // })
+    // .then(data => {
+    //   this.project = data;
+    //   sessionStorage.setItem(`${this.project.projectName}__Data`, JSON.stringify(this.project));
+    // })
+    // .catch(error => {
+    //   console.error('Error fetching data', error);
+    // })
     
   }
 }
