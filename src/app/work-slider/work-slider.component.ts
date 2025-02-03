@@ -3,19 +3,20 @@ import { CommonModule } from "@angular/common";
 import { environment } from "../../environment/environment";
 import { ApiService } from "../services/api.service";
 import { HttpClient } from "@angular/common/http";
+import { ImageDisplayComponent } from '../image-display/image-display.component' 
 
 @Component({
     selector: 'app-work-slider',
     standalone: true,
     templateUrl: './work-slider.component.html',
     styleUrls: ['./work-slider.component.scss'],
-    imports: [CommonModule]
+    imports: [CommonModule, ImageDisplayComponent]
 })
 
 
 
 export class WorkSliderComponent implements OnInit, AfterViewInit {
-    imageUrl: string | null = null;
+
 
 
 
@@ -38,22 +39,14 @@ export class WorkSliderComponent implements OnInit, AfterViewInit {
 
         // }
 
-        /* WORKING CALL */
-        // this.apiService.getProjects_Showcase()
-        // .then(data => {
-        //     this.data = data;
-        //     sessionStorage.setItem('showcaseIDs', JSON.stringify(this.data));
-        // })
-        // .catch(error => {
-        //     console.error('There was an error gathering showcases: ', error);
-        // })
-
-        this.apiService.getProjects_Image('6792bc38d4474f741c193792')
+        this.apiService.getProjects_Showcase()
             .then(data => {
-                this
+                this.data = data;
+                sessionStorage.setItem('showcaseIDs', JSON.stringify(this.data));
+                this.addImages();
             })
             .catch(error => {
-                console.error('There was an error gathering the image: ', error);
+                console.error('There was an error gathering showcases: ', error);
             })
 
 
