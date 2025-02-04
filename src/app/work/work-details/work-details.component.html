@@ -24,7 +24,7 @@
             <!-- Head project image and description -->
             <section>
                 <div *ngIf="project" class="project__header-box">
-                    <!-- <img [src]="baseUrl + '/projects/image/' + project._id"/> -->
+                     <app-image-display  [imageId]="project._id" imageType="projects"></app-image-display>
                     <p>{{ project.projectDescription }}</p>
                 </div>
             </section>
@@ -39,7 +39,7 @@
                         </div>
     
                         <div class="status__picture">
-                            <!-- <img  [src]=" baseUrl + '/projects/image/' + (project._id + item._id)"/> -->
+                             <app-image-display [imageId]="(project._id + item._id)" imageType="projects"></app-image-display>
                         </div>
                     </div>
                 </div>
@@ -57,23 +57,3 @@
 
 
 
-<!-- <body class="work">
-    <div class="row">
-        <div class="projects__container">
-            <section>
-                <div class="head-project">
-                    <img [src]=" baseUrl + '/projects/image/' + project._id"/>
-                    <p>{{ project.projectDescription }}</p>
-                </div>
-            </section>
-                <div *ngFor="let item of project.projectStatuses">
-                    <div class="project__item">
-                        <div class="text__box">
-                            <p> {{ item.statusDescription }} </p>
-                        </div>
-                        <img class="image__box" [src]=" baseUrl + '/projects/image/' + (project._id + item._id)"/>
-                    </div>
-                </div>
-            </div>
-        </div>
-</body> -->

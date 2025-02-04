@@ -1,8 +1,6 @@
 import { Component, OnInit, ElementRef, AfterViewInit, ViewChild} from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { environment } from "../../environment/environment";
 import { ApiService } from "../services/api.service";
-import { HttpClient } from "@angular/common/http";
 import { ImageDisplayComponent } from '../image-display/image-display.component' 
 
 @Component({

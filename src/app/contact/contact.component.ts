@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { environment } from '../../environment/environment';
+import { ImageDisplayComponent } from '../image-display/image-display.component';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [CommonModule, NavbarComponent],
+  imports: [CommonModule, NavbarComponent, ImageDisplayComponent],
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.scss'
 })

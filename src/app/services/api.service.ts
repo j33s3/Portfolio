@@ -36,7 +36,7 @@ export class ApiService {
   }
 
   /*       Getting Details       */
-  async getProjects_Details(projectId: String): Promise<any> {
+  async getProjects_Details(projectId: string): Promise<any> {
     return this.makeAPICall(`projects/details/${projectId}`);
   }
 

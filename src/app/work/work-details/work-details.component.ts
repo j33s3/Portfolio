@@ -1,47 +1,37 @@
 import { Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavbarComponent } from '../../navbar/navbar.component';
 import { ActivatedRoute } from '@angular/router';
-import { environment } from '../../../environment/environment';
+
+import { NavbarComponent } from '../../navbar/navbar.component';
+import { ApiService } from '../../services/api.service';
+import { ImageDisplayComponent } from '../../image-display/image-display.component';
 
 @Component({
   selector: 'app-work-details',
   standalone: true,
-  imports: [CommonModule, NavbarComponent],
+  imports: [CommonModule, NavbarComponent, ImageDisplayComponent],
   templateUrl: './work-details.component.html',
   styleUrl: './work-details.component.scss'
 })
 export class WorkDetailsComponent implements OnInit {
-  // baseUrl = environment.dbBaseUrl;
 
   project: any;
-  // private apiUrl = `${this.baseUrl}/projects/details`;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private apiService: ApiService) {}
 
   ngOnInit(): void {
     const projectId = this.route.snapshot.paramMap.get('id');
     if(projectId) {
-      this.fetchProjectDetails(projectId);
+      this.apiService.getProjects_Details(projectId)
+        .then(data => {
+          this.project = data
+          sessionStorage.setItem('showcaseIDs', JSON.stringify(this.project));
+        })
+        .catch(error => {
+          console.error('An error occured fetching details: ', error);
+        })
     }
+
   }
 
-
-  fetchProjectDetails(id: string): void {
-    // fetch(`${this.apiUrl}/${id}`)
-    // .then(response => {
-    //   if(!response.ok) {
-    //     throw new Error(`HTTP error! status: ${response.status}`)
-    //   }
-    //   return response.json();
-    // })
-    // .then(data => {
-    //   this.project = data;
-    //   sessionStorage.setItem(`${this.project.projectName}__Data`, JSON.stringify(this.project));
-    // })
-    // .catch(error => {
-    //   console.error('Error fetching data', error);
-    // })
-    
-  }
 }

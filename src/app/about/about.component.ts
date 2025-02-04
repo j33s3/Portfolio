@@ -1,12 +1,14 @@
 import { Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { environment } from '../../environment/environment';
+import { ApiService } from '../services/api.service'; 
+import { ImageDisplayComponent } from '../image-display/image-display.component';
+
 
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [CommonModule, NavbarComponent],
+  imports: [CommonModule, NavbarComponent, ImageDisplayComponent],
   templateUrl: './about.component.html',
   styleUrl: './about.component.scss'
 })
@@ -14,34 +16,28 @@ export class AboutComponent implements OnInit{
 
   data: any[] = []
 
-  constructor() {}
+  constructor(private apiService: ApiService) {}
 
 
   ngOnInit(): void {
-    const cachedData = sessionStorage.getItem('aboutData');
-    if (cachedData) {
-      this.data = JSON.parse(cachedData);
-    } else {
-      this.fetchData();
-    }
-  }
+    // const cachedData = sessionStorage.getItem('aboutData');
+    // if (cachedData) {
+    //   this.data = JSON.parse(cachedData);
+    // } else {
+    //   this.fetchData();
+    // }
 
-  fetchData() : void {
-  //   const about = `${this.baseUrl}/about`;                      // URL to the about contents
+    this.apiService.getAbout()
+      .then(data => {
+        this.data = data;
+        console.log(data);
+        sessionStorage.setItem('aboutData', JSON.stringify(this.data));
+      })
+      .catch(error => {
+        console.error('There was an error fetching about: ', error);
+      })
+    
 
-  //   fetch(about)
-  //     .then(response => {                                                 // Check is the response is good
-  //       if(!response.ok) {
-  //         throw new Error(`HTTP error! status: ${response.status}`);
-  //       }
-  //       return response.json();                                           // If good then return response
-  //     })
-  //     .then(data => {                                                     // Set data to the class variable
-  //       this.data = data;
-  //       sessionStorage.setItem('aboutData', JSON.stringify(this.data));
-  //     })
-  //     .catch(error => {                                                   // Upon reaching an error print it to console
-  //       console.error('Error fetching data:', error);
-  //     })
+
   }
 }
