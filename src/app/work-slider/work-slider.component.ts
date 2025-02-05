@@ -26,33 +26,41 @@ export class WorkSliderComponent implements OnInit, AfterViewInit {
     private rafId: number = 0;
     private isPaused: boolean = false;
     private windowW: number = window.innerWidth;
+    private recycled: boolean = false;
 
     constructor(private apiService: ApiService) { }
 
     ngOnInit(): void {
         const cachedData = sessionStorage.getItem('showcaseIDs');
-        // if(cachedData) {
-        //     this.data = JSON.parse(cachedData);
-        // } else {
-
-        // }
-
-        this.apiService.getProjects_Showcase()
-            .then(data => {
-                this.data = data;
-                sessionStorage.setItem('showcaseIDs', JSON.stringify(this.data));
-                this.addImages();
-            })
-            .catch(error => {
-                console.error('There was an error gathering showcases: ', error);
-            })
-
+        
+        if(cachedData && !cachedData.includes('"Internal Server Error"') && !cachedData.includes('"Forbidden"')) {
+            this.data = JSON.parse(cachedData);
+            console.log('Using Cached Data');
+            this.recycled = true;
+        } else {
+            this.fetchData();
+        }
+        this.addImages();
 
         if (typeof window === 'undefined' || !('requestAnimationFram' in window)) {                     // Warn that the browser is not compatable
             console.warn('requestAnimationFram is not available in this environment');
         }
 
     }
+
+    private async fetchData() {
+        this.apiService.getProjects_Showcase()
+        .then(data => {
+          this.data = data
+          sessionStorage.setItem('showcaseIDs', JSON.stringify(this.data));  
+        })
+        .catch(error => {
+          console.error('An error occured fetching showcase Ids: ', error);
+          return null;
+        })
+      }
+
+
 
 
 
@@ -74,6 +82,14 @@ export class WorkSliderComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit(): void {                                                                           // Once view is loaded start the slider
         this.startSlider();
+
+        if(this.recycled) {
+            const dbversion = this.apiService.getDBVersion();
+            if(this.data[0].dbVersion != dbversion) {
+            this.fetchData();
+            }
+        }
+          
     }
 
 

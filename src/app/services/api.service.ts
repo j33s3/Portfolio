@@ -60,6 +60,24 @@ export class ApiService {
 
 
   /*******************************/
+  /*       FOR DB VERSIONING     */
+  /*******************************/
+
+  async getDBVersion(): Promise<any> {
+    var dbversion = null
+
+    this.makeAPICall('dbversion')
+    .then(data => {
+      dbversion = data;
+    })
+    .catch(error => {
+      console.error('An error occurred fetching DB version', error);
+    })
+    return dbversion;
+  }
+
+
+  /*******************************/
   /*   UNIVERSAL FETCH METHOD    */
   /*******************************/
 
