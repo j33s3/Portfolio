@@ -1,7 +1,8 @@
-import { Component, OnInit, ElementRef, AfterViewInit, ViewChild} from "@angular/core";
+import { Component, OnInit, ElementRef, AfterViewInit, ViewChild, OnDestroy} from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { ApiService } from "../services/api.service";
 import { ImageDisplayComponent } from '../image-display/image-display.component' 
+import { clearInterval } from "node:timers";
 
 @Component({
     selector: 'app-work-slider',
@@ -13,20 +14,17 @@ import { ImageDisplayComponent } from '../image-display/image-display.component'
 
 
 
-export class WorkSliderComponent implements OnInit, AfterViewInit {
-
-
-
-
+export class WorkSliderComponent implements OnInit, AfterViewInit{
 
     offset: number = 0;
     data: any[] = [];
-    images: {ID: string, Name: string}[] = [];
+    images: {ID: string, Name: string}[] = []
 
-    private rafId: number = 0;
-    private isPaused: boolean = false;
-    private windowW: number = window.innerWidth;
+    private intervalId: any = null;
     private recycled: boolean = false;
+    private isPaused: boolean = false;
+    
+
 
     constructor(private apiService: ApiService) { }
 
@@ -45,10 +43,30 @@ export class WorkSliderComponent implements OnInit, AfterViewInit {
         if (typeof window === 'undefined' || !('requestAnimationFram' in window)) {                     // Warn that the browser is not compatable
             console.warn('requestAnimationFram is not available in this environment');
         }
-
     }
 
-    private async fetchData() {
+    ngAfterViewInit(): void {
+        this.startSlider();
+
+        if (this.recycled) {
+            const dbVersion = this.apiService.getDBVersion();
+            if(this.data[0].dbversion != dbVersion) {
+                this.fetchData();
+            }
+        }
+    }
+
+    private addImages() {
+        for( let image of this.data ) {                                                                 // This Places the initial pictures into the set
+            this.images.push({ID: image._id, Name: image.projectName})
+        }
+
+        for(let i = 0; i < 4; i++) {                                                                    // This places 4 extra images at the end for a smooth transition
+            this.images.push({ID: this.data[i]._id, Name: this.data[i].projectName})
+        }
+    }
+
+    private fetchData() {
         this.apiService.getProjects_Showcase()
         .then(data => {
           this.data = data
@@ -59,90 +77,32 @@ export class WorkSliderComponent implements OnInit, AfterViewInit {
           console.error('An error occured fetching showcase Ids: ', error);
           return null;
         })
-      }
-
-
-
-
-
-
-    addImages() {
-
-
-        for( let image of this.data ) {                                                                 // This Places the initial pictures into the set
-            this.images.push({ID: image._id, Name: image.projectName})
-        }
-
-        for(let i = 0; i < 4; i++) {                                                                    // This places 4 extra images at the end for a smooth transition
-            this.images.push({ID: this.data[i]._id, Name: this.data[i].projectName})
-        }
-
     }
 
-    //**   Animation   **//
+    startSlider() {
+        if(this.intervalId) return;
 
-    ngAfterViewInit(): void {                                                                           // Once view is loaded start the slider
-        this.startSlider();
-
-        if(this.recycled) {
-            const dbversion = this.apiService.getDBVersion();
-            if(this.data[0].dbVersion != dbversion) {
-            this.fetchData();
+        this.intervalId = setInterval(() => {
+            if(!this.isPaused) {
+                this.updateImageOffsets();
             }
+        }, 8); // Runs at ~60fps (1000ms / 60 = ~16ms per frame);
+    }
+
+    updateImageOffsets() {
+        this.offset -= 0.3;
+
+        if (this.offset <= (this.images.length -4) * -109.5) {
+            this.offset = 0;
         }
-          
     }
-
-
-
-    startSlider() {                                                                                     
-        const updateImages = () => {                                                                    // recursivly calls the updateImagesOffset untill hover
-            if(this.isPaused) return;
-            this.updateImagesOffsets();
-            this.rafId = requestAnimationFrame(updateImages);
-        };
-        updateImages();
-    }
-
-    updateImagesOffsets() {
-        
-
-
-
-
-        this.images = this.images.map((image) => {                                                      // Set the offset and if it is greater, move frame to beggining
-            this.offset -= 0.05;
-            
-            // if (this.offset <= (this.images.length - 4) * -108.5) {
-            //     this.offset = 0;
-            // }
-
-            if (this.offset <= (this.images.length - 4) * -109.5) {
-                this.offset = 0;
-            }
-
-            return image;
-        });
-    }
-
 
     pauseSlider() {
-        if (this.rafId) {                                                                               // Cancel the animation and set status to paused
-            cancelAnimationFrame(this.rafId);
-            this.rafId = 0;
-        }
         this.isPaused = true;
     }
 
-    resumeSlider() {                                                                                    // Set status to playing and call the startSlider function again
+    resumeSlider() {
         this.isPaused = false;
-        this.startSlider();
     }
 
-
-    ngOnDestroy(): void {                                                                               // Reset Contents to clear memory
-        if(this.rafId) {
-            cancelAnimationFrame(this.rafId);
-        }
-    }
 }

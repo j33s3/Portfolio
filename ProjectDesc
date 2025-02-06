@@ -30,3 +30,4 @@
 29. Implemented SigV4 for securing the DB using STS tokens
 30. Implemented db versioning to see if the items should be updated
 31. Implemented key caching to reduce key fetching. the keys are only used for a single page (i.e loading all elements), once refreshed a new key is requested
+32. Ovehauled the work slider to make it utilize intervals
