@@ -24,7 +24,7 @@ export class WorkDetailsComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     const cachedData = sessionStorage.getItem('showcaseIDs')
     
-    if(cachedData && !cachedData.includes('"Internal Server Error"') && !cachedData.includes('"Forbidden"')) {
+    if(cachedData && !cachedData.includes('"Internal Server Error"') && !cachedData.includes('"Forbidden"') && cachedData != 'null') {
       this.project = JSON.parse(cachedData);
       console.log('Using Cached Data');
       this.recycled = true;

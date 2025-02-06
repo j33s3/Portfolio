@@ -33,14 +33,14 @@ export class WorkSliderComponent implements OnInit, AfterViewInit {
     ngOnInit(): void {
         const cachedData = sessionStorage.getItem('showcaseIDs');
         
-        if(cachedData && !cachedData.includes('"Internal Server Error"') && !cachedData.includes('"Forbidden"')) {
+        if(cachedData && !cachedData.includes('"Internal Server Error"') && !cachedData.includes('"Forbidden"') && cachedData != 'null') {
             this.data = JSON.parse(cachedData);
-            console.log('Using Cached Data');
             this.recycled = true;
         } else {
             this.fetchData();
+            this.addImages();
         }
-        this.addImages();
+
 
         if (typeof window === 'undefined' || !('requestAnimationFram' in window)) {                     // Warn that the browser is not compatable
             console.warn('requestAnimationFram is not available in this environment');
@@ -52,7 +52,8 @@ export class WorkSliderComponent implements OnInit, AfterViewInit {
         this.apiService.getProjects_Showcase()
         .then(data => {
           this.data = data
-          sessionStorage.setItem('showcaseIDs', JSON.stringify(this.data));  
+          sessionStorage.setItem('showcaseIDs', JSON.stringify(this.data)); 
+          this.addImages();
         })
         .catch(error => {
           console.error('An error occured fetching showcase Ids: ', error);

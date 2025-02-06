@@ -4,7 +4,7 @@ import { environment } from '../../environment/environment';
 // For signing
 import { SignatureV4 } from '@aws-sdk/signature-v4';
 import { Sha256 } from '@aws-crypto/sha256-js';
-import { sign } from 'node:crypto';
+import { StsAuthService } from './sts-auth.service';
 
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
@@ -16,7 +16,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 export class ApiService {
   url = new URL(environment.baseUrl);
 
-  constructor(private sanitizer: DomSanitizer) { }
+  constructor(private sanitizer: DomSanitizer, private stsAuthService: StsAuthService) { }
 
   async getProjects_School(): Promise<any> {
     return this.makeAPICall('projects/school');
@@ -86,8 +86,25 @@ export class ApiService {
    * @param path (the string path after the stage {'/prod/'})
    */
     private async makeAPICall(path: string, image: boolean = false): Promise<any> {
+
+      var accessKeyId = '';
+      var secretAccessKey = '';
+      var sessionToken = '';
+
+
+      if(this.stsAuthService.isTokenValid()){
+        console.log('re-using token');
+        ({ accessKeyId, secretAccessKey, sessionToken } = await this.stsAuthService.getToken());
+      } else {
+        console.log('Fetching new token');
+        await this.stsAuthService.fetchToken();
+        ({ accessKeyId, secretAccessKey, sessionToken } = await this.stsAuthService.getToken());
+      }
+
+
+
+
       var request;
-      const { accessKeyId, secretAccessKey, sessionToken } = await this.fetchSTS();
       const service = 'execute-api';
       const region = 'us-west-2';
       const date = new Date().toISOString().replace(/[:-]|\.\d{3}/g, '');

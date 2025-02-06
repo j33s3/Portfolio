@@ -24,7 +24,7 @@ export class WorkPersonalComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     const cachedData = sessionStorage.getItem('personalData');
-    if(cachedData && !cachedData.includes('"Internal Server Error"') && !cachedData.includes('"Forbidden"')) {
+    if(cachedData && !cachedData.includes('"Internal Server Error"') && !cachedData.includes('"Forbidden"') && cachedData != 'null') {
       this.data = JSON.parse(cachedData);
       console.log('Using Cached Data');
       this.recycled = true;
