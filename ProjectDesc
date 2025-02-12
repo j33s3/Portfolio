@@ -30,6 +30,7 @@
 29. Implemented SigV4 for securing the DB using STS tokens
 30. Implemented db versioning to see if the items should be updated
 31. Implemented key caching to reduce key fetching. the keys are only used for a single page (i.e loading all elements), once refreshed a new key is requested
-32. Ovehauled the work slider to make it utilize intervals
-33. Introduced reverse proxy to cloudfront for the API gateway. This was to solve my CORS error.
-34. Fixed details page not loading assets and passing undefined to the API.
+32. Added signed API requests to the contact form for post requests.
+33. Ovehauled the work slider to make it utilize intervals
+34. Introduced reverse proxy to cloudfront for the API gateway. This was to solve my CORS error.
+36. Fixed details page not loading assets and passing undefined to the API.
