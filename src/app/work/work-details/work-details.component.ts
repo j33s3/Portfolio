@@ -15,59 +15,46 @@ import { ImageDisplayComponent } from '../../image-display/image-display.compone
 })
 export class WorkDetailsComponent implements OnInit, AfterViewInit {
 
-  project: any;
+  project!: any;
+  projectId: any;
 
-  private recycled = false
+  private recycled = false;
 
-  constructor(private route: ActivatedRoute, private apiService: ApiService) {}
+  constructor(private route: ActivatedRoute, private apiService: ApiService) {
+    this.projectId = this.route.snapshot.paramMap.get('id');
+  }
 
-  ngOnInit(): void {
-    const cachedData = sessionStorage.getItem('showcaseIDs')
-    
+  async ngOnInit(): Promise<void> {
+    const cachedData = sessionStorage.getItem(`details_${this.projectId}`);
+
     if(cachedData && !cachedData.includes('"Internal Server Error"') && !cachedData.includes('"Forbidden"') && cachedData != 'null') {
       this.project = JSON.parse(cachedData);
       console.log('Using Cached Data');
       this.recycled = true;
     }
     else {
-      this.fetchData();
+      console.log('Fetching data');
+      await this.fetchData();
     }
-
-
-
-    const projectId = this.route.snapshot.paramMap.get('id');
-    if(projectId) {
-      this.apiService.getProjects_Details(projectId)
-        .then(data => {
-          this.project = data
-          sessionStorage.setItem('showcaseIDs', JSON.stringify(this.project));
-        })
-        .catch(error => {
-          console.error('An error occured fetching details: ', error);
-        })
-    }
-
   }
 
-  ngAfterViewInit(): void {
+  async ngAfterViewInit(): Promise<void> {
     if(this.recycled) {
       const dbVersion = this.apiService.getDBVersion();
-      if(this.project.dbVersion == dbVersion) {
-        this.fetchData();
+      if(this.project.dbVersion !== dbVersion) {
+        await this.fetchData();
       }
     }
   }
 
-  private async fetchData() {
-    this.apiService.getAbout()
-      .then(data => {
-        this.project = data
-        sessionStorage.setItem('showcaseIDs', JSON.stringify(this.project));
-      })
-      .catch(error => {
-        console.error('An error occured fetching project details ', error);
-        return null;
-      })
+  private async fetchData(): Promise<void> {
+    try{
+      this.project = await this.apiService.getProjects_Details(this.projectId);
+      this.project = this.project[0];
+      sessionStorage.setItem(`details_${this.projectId}`, JSON.stringify(this.project))
+    } catch (error) {
+      console.error('An error occurred fetching project details', error);
+    }
   }
 
 }

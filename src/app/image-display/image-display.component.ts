@@ -11,7 +11,8 @@ import { CommonModule } from '@angular/common';
 export class ImageDisplayComponent implements OnInit{
   @Input() imageId!: string;      // Is the Id for the image
   @Input() imageType!: string;    // Dictates Projects || About
-  @Input() importStyle: { [key: string]: string } = {}; 
+  @Input() importStyle: { [key: string]: string } = {};
+  @Input() isShowcase: boolean = false; 
   imageUrl: string | null = null;
 
   constructor(private apiService: ApiService) { }

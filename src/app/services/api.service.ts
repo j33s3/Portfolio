@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { ENVIRONMENT_INITIALIZER, Injectable } from '@angular/core';
 import { environment } from '../../environment/environment';
 
 // For signing
@@ -14,7 +14,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
   providedIn: 'root'
 })
 export class ApiService {
-  url = new URL(environment.baseUrl);
+  url = new URL(environment.STSUrl);
 
   constructor(private sanitizer: DomSanitizer, private stsAuthService: StsAuthService) { }
 
@@ -76,6 +76,13 @@ export class ApiService {
     return dbversion;
   }
 
+  /*******************************/
+  /*       FOR SENDING EMAIL     */
+  /*******************************/
+  async postEmail(body: any): Promise<any> {
+     return this.makeAPICall('contact', false, body);
+  }
+
 
   /*******************************/
   /*   UNIVERSAL FETCH METHOD    */
@@ -85,40 +92,54 @@ export class ApiService {
    * Makes a signed request to the api returning the response
    * @param path (the string path after the stage {'/prod/'})
    */
-    private async makeAPICall(path: string, image: boolean = false): Promise<any> {
+    private async makeAPICall(path: string, image: boolean = false, body?: string): Promise<any> {
 
       var accessKeyId = '';
       var secretAccessKey = '';
       var sessionToken = '';
 
+      // body = JSON.stringify(body);
+
 
       if(this.stsAuthService.isTokenValid()){
-        console.log('re-using token');
         ({ accessKeyId, secretAccessKey, sessionToken } = await this.stsAuthService.getToken());
       } else {
-        console.log('Fetching new token');
         await this.stsAuthService.fetchToken();
         ({ accessKeyId, secretAccessKey, sessionToken } = await this.stsAuthService.getToken());
       }
-
-
-
 
       var request;
       const service = 'execute-api';
       const region = 'us-west-2';
       const date = new Date().toISOString().replace(/[:-]|\.\d{3}/g, '');
       const host = this.url.host;
+      const method = body ? 'POST' : 'GET'
 
-      const options = {
+
+
+
+      const options: {
+        hostname: string;
+        path: string;
+        method: string;
+        headers: Record<string, string>;
+      } = {
         hostname: host,
         path: `/prod/${path}`,
-        method: 'GET',
+        method: method,
         headers: {
           'Host': host,
           'X-Amz-Date': date,
-        },
+        }
       };
+
+
+
+      if(body) {
+        options.headers['Content-Type'] = 'application/json';
+        options.headers['Content-Length'] = body.length.toString();
+      }
+
 
       
       const signer = new SignatureV4({
@@ -132,20 +153,26 @@ export class ApiService {
         sha256: Sha256,
       });
 
-      
-      const signedRequest = await signer.sign({
-        method: options.method,
-        headers: options.headers,
-        hostname: host,
-        path: `/prod/${path}`,
-        protocol: 'https:'
-      });
 
+
+        var signedRequest = await signer.sign({
+          method: options.method,
+          headers: options.headers,
+          hostname: host,
+          path: `/prod/${path}`,
+          protocol: 'https:',
+          body: body,
+        });
+
+      
+      
+
+    
 
       Object.assign(options.headers, signedRequest.headers);
 
       if(!image) {
-        await this.fetchData(path, signedRequest)
+        await this.fetchData(path, signedRequest, body)
         .then(response => response.json())
         .then(data => {
           request = data;
@@ -157,10 +184,11 @@ export class ApiService {
       return request;
     }
 
-    private async fetchData(path: string, signedRequest: any): Promise<any> {
-      const response = await fetch(`prod/${path}`, {
-        method: 'GET',
+    private async fetchData(path: string, signedRequest: any, body: any): Promise<any> {
+      const response = await fetch(`${environment.baseUrl}${path}`, {
+        method: signedRequest.method,
         headers: signedRequest.headers,
+        body: body,
       })
 
       return response;
@@ -171,8 +199,8 @@ export class ApiService {
 
     private async fetchImage(path: string, signedRequest: any): Promise<SafeUrl | null> {
       try{
-        const response = await fetch(`prod/${path}`, {
-          method: 'GET',
+        const response = await fetch(`${environment.baseUrl}${path}`, {
+          method: signedRequest.method,
           headers: signedRequest.headers,
         })
 
@@ -193,16 +221,4 @@ export class ApiService {
       }
     }
 
-
-    /**
-     * Fetches the STS tokens from lambda function
-     * @returns {accessKeyId, secretAccessKey, sessionToken}
-     */
-    private async fetchSTS() {
-      const response = await fetch(environment.STSUrl, {
-        method: 'GET',
-      });
-      const creds = await response.json();
-      return creds;
-    }
 }

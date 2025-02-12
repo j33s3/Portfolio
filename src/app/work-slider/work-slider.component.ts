@@ -2,14 +2,14 @@ import { Component, OnInit, ElementRef, AfterViewInit, ViewChild, OnDestroy} fro
 import { CommonModule } from "@angular/common";
 import { ApiService } from "../services/api.service";
 import { ImageDisplayComponent } from '../image-display/image-display.component' 
-import { clearInterval } from "node:timers";
 
 @Component({
     selector: 'app-work-slider',
     standalone: true,
     templateUrl: './work-slider.component.html',
     styleUrls: ['./work-slider.component.scss'],
-    imports: [CommonModule, ImageDisplayComponent]
+    imports: [CommonModule, ImageDisplayComponent],
+    providers: [ApiService]
 })
 
 

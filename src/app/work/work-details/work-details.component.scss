@@ -48,11 +48,17 @@ body{
     align-items: center;
     flex-direction: column;
     overflow-y: hidden;
+
 }
 
-.project__header-box img{
-    padding-bottom: 4rem;
+.project__header-image {
+    align-items: center;
+    justify-content: center;
     max-width: 900px;
+}
+
+.project__header-box p{
+    margin-top: 2rem;
 }
 
 

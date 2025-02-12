@@ -26,7 +26,7 @@
     display: flex;
     position: absolute;
     top: 35%;
-    justify-content: center;                                                             /*Moves the top edge of the element to 50% of height of its containing element*/
+    justify-content: center;                                              /*Moves the top edge of the element to 50% of height of its containing element*/
     transform: translateY(-65%);                                          /*This adjusts the position element moving it upwards 50% of its own height*/
 }
 
@@ -274,26 +274,26 @@ body {
     }
 }
 
-.video__picture-box{
-    display: flex;
-    position: block;
-    height: auto;
+.video__picture-box {
+    position: relative;
     width: 600px;
-    aspect-ratio: 16 / 9;
-
+    padding-top: 337.5px;
+    height: 0;
+    overflow: hidden;
 }
 
 .video__picture {
-    position:absolute;
-    width: inherit;
-    height: inherit;
-    aspect-ratio: inherit;
-    transform: translateY(0);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 @media(max-width: 800px) {
     .video__picture-box {
         width: 400px;
+        padding-top: 225px; 
     }
 }
 

@@ -1,23 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { ImageDisplayComponent } from '../image-display/image-display.component';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, ImageDisplayComponent],
+  imports: [CommonModule, NavbarComponent],
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.scss'
 })
 export class ContactComponent implements OnInit {
 
+  constructor(private apiService: ApiService) { }
+
   ngOnInit(): void {
 
     // add an event listener to the form when pressing submit
     const form = document.getElementById('contactForm') as HTMLFormElement;
+
     form?.addEventListener('submit', async (event) => {
-    event.preventDefault();
+      event.preventDefault();
 
       // Fetch items from the form
       const name = (document.getElementById('name') as HTMLInputElement)?.value;
@@ -38,8 +41,16 @@ export class ContactComponent implements OnInit {
       //     }
       //   );
 
-      //   // Track the response
-      //   const result = await response.json();
+        await this.apiService.postEmail(JSON.stringify({ name, email, message }))
+          .then(data => {
+            console.log(data);
+          })
+          .catch(error => {
+            console.log(error);
+          })
+
+        // Track the response
+        // const result = await response.json();
         
 
       //   // If success notify, else notify error

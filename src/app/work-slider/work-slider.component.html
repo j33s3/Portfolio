@@ -2,13 +2,11 @@
     <div class="work-slider">
         <!-- <div class="work-track"> -->
             <div *ngFor="let image of images" 
-                    class="work-slide" 
                     [ngStyle]="{ transform: 'translateX(' + offset + '%)'}"
                     (mouseenter)="pauseSlider()"
                     (mouseleave)="resumeSlider()">
-                    <a [href]="'/details/' + image.ID" class="full-link">
+                    <a  [href]="'/details/' + image.ID" class="full-link">
                         <app-image-display [imageId]="image.ID" imageType="projects" [importStyle]="{ 'border-radius': '15px'}" ></app-image-display>
-                        <!-- <img [src]=" baseUrl + '/projects/image/' + image.ID" alt="Image" style="border-radius: 15px;"/> -->
                         <div class="overlay-text">{{ image.Name }}</div>
                     </a>
     
