@@ -25,7 +25,7 @@
             <section>
                 <div *ngIf="project else loading" class="project__header-box">
                      <app-image-display class="project__header-image"  [imageId]="project._id" imageType="projects"></app-image-display>
-                    <p>{{ project.projectDescription }}</p>
+                    <p [innerHTML]="project.projectDescription"></p>
                 </div>
             </section>
 
@@ -34,12 +34,12 @@
                 <div *ngFor="let item of project.projectStatuses">
                     <div class="status__box">
                         <div class="status__text">
-                            <h3 class="status__title">This is status name</h3>
-                            <span class="status__description">{{ item.statusDescription }}</span>
+                            <h3 class="status__title">{{item.statusName}}</h3>
+                            <span class="status__description" [innerHTML]="item.statusDescription"></span>
                         </div>
     
                         <div class="status__picture">
-                             <app-image-display [imageId]="(project._id + item._id)" imageType="projects"></app-image-display>
+                            <app-image-display [parentId]="projectId" [imageId]="project._id + '_' + item._id" imageType="projects"></app-image-display>
                         </div>
                     </div>
                 </div>
@@ -55,8 +55,6 @@
 <ng-template #loading>
     <p>Loading project details...</p>
   </ng-template>
-
-
 
 
 

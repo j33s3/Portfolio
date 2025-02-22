@@ -36,6 +36,8 @@ export class WorkDetailsComponent implements OnInit, AfterViewInit {
       console.log('Fetching data');
       await this.fetchData();
     }
+
+    await this.apiService.fetchAllProject_Images(this.projectId);
   }
 
   async ngAfterViewInit(): Promise<void> {

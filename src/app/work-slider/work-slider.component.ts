@@ -29,28 +29,37 @@ export class WorkSliderComponent implements OnInit, AfterViewInit{
     constructor(private apiService: ApiService) { }
 
     ngOnInit(): void {
+        // Assign the cached data
         const cachedData = sessionStorage.getItem('showcaseIDs');
         
+        // If the data is still valid then use it
         if(cachedData && !cachedData.includes('"Internal Server Error"') && !cachedData.includes('"Forbidden"') && cachedData != 'null') {
             this.data = JSON.parse(cachedData);
             this.recycled = true;
-        } else {
+        } 
+
+        // Else start the fetch process
+        else {
             this.fetchData();
             this.addImages();
         }
 
-
-        if (typeof window === 'undefined' || !('requestAnimationFram' in window)) {                     // Warn that the browser is not compatable
+        // Warn that the browser is not compatable
+        if (typeof window === 'undefined' || !('requestAnimationFrame' in window)) {                     
             console.warn('requestAnimationFram is not available in this environment');
         }
     }
 
+    // After the view is established
     ngAfterViewInit(): void {
         this.startSlider();
 
+        // If data is reused
         if (this.recycled) {
+            // Check is the DB version is accurate
             const dbVersion = this.apiService.getDBVersion();
             if(this.data[0].dbversion != dbVersion) {
+                // If not then fetch new data
                 this.fetchData();
             }
         }

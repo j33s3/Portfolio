@@ -7,6 +7,7 @@ import { Sha256 } from '@aws-crypto/sha256-js';
 import { StsAuthService } from './sts-auth.service';
 
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { BehaviorSubject } from 'rxjs';
 
 
 
@@ -15,6 +16,8 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 })
 export class ApiService {
   url = new URL(environment.STSUrl);
+  private imageCache = new Map<string, SafeUrl | null>();
+  private images$ = new BehaviorSubject<Map<string, SafeUrl | null>>(new Map());
 
   constructor(private sanitizer: DomSanitizer, private stsAuthService: StsAuthService) { }
 
@@ -33,6 +36,14 @@ export class ApiService {
   /*       Getting Images       */
   async getProjects_Image(imageId: String,): Promise<any> {
     return this.makeAPICall(`projects/image/${imageId}`, true);
+  }
+
+  async getAllProject_Images(documentId: string): Promise<BehaviorSubject<Map<string, SafeUrl | null>>> {
+    return this.images$; 
+  }
+
+  async fetchAllProject_Images(documentId: string) {
+    this.makeAPICall(`projects/get-all-images/${documentId}`, true, true);
   }
 
   /*       Getting Details       */
@@ -80,7 +91,7 @@ export class ApiService {
   /*       FOR SENDING EMAIL     */
   /*******************************/
   async postEmail(body: any): Promise<any> {
-     return this.makeAPICall('contact', false, body);
+     return this.makeAPICall('contact', false, false, body);
   }
 
 
@@ -92,7 +103,7 @@ export class ApiService {
    * Makes a signed request to the api returning the response
    * @param path (the string path after the stage {'/prod/'})
    */
-    private async makeAPICall(path: string, image: boolean = false, body?: string): Promise<any> {
+    private async makeAPICall(path: string, image: boolean = false, multipleImg: boolean = false, body?: string): Promise<any> {
 
       var accessKeyId = '';
       var secretAccessKey = '';
@@ -178,7 +189,11 @@ export class ApiService {
           request = data;
         })
       } else {
-        request = await this.fetchImage(path, signedRequest)
+        if(!multipleImg) {
+          request = await this.fetchImage(path, signedRequest);
+        } else {
+          await this.fetchAllImages(path, signedRequest);
+        }
       }
 
       return request;
@@ -196,6 +211,64 @@ export class ApiService {
     }
 
 
+    private async fetchAllImages(path: string, signedRequest: any) {   
+      console.log(`${environment.baseUrl}${path}`);   
+      try{
+        const response = await fetch(`${environment.baseUrl}${path}`, {
+          method: signedRequest.method,
+          headers: signedRequest.headers,
+        }) 
+        
+        if(!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
+        console.log(response);
+
+        var images = await response.json();
+        images = JSON.stringify(images, null, 2);
+        images = JSON.parse(images);
+        // console.log(`yus sir ${JSON.stringify(images, null, 2)}`);
+        console.log(images);
+        this.cacheImages(path.split('/').pop() as string, images);
+
+        this.images$.next(new Map(this.imageCache));
+
+
+      } catch(error) {
+        console.error('Error fetching image: ', error);
+      }
+    }
+
+    private cacheImages(parentId: string, images: any) {
+      if (images.projectPicture) {
+        this.imageCache.set(`${parentId}`, this.createSafeUrl(images.projectPicture, images.contentType))
+      }
+
+      for (let status of images.projectStatuses) {
+        this.imageCache.set(`${parentId}_${status._id}`, this.createSafeUrl(status.statusPicture, status.contentType));
+        console.log(this.imageCache.get(`${parentId}_${status._id}`))
+      }
+
+      this.images$.next(new Map(this.imageCache));
+
+    }
+
+    private createSafeUrl(base64String: string, contentType: string): SafeUrl {
+      const blob = this.base64ToBlob(base64String, contentType);
+      const objectUrl = URL.createObjectURL(blob);
+      return this.sanitizer.bypassSecurityTrustUrl(objectUrl);
+    }
+
+    private base64ToBlob(base64: string, contentType: string): Blob {
+      const byteCharacters = atob(base64);
+      const byteNumbers = new Array(byteCharacters.length).fill(0).map((_, i) => byteCharacters.charCodeAt(i));
+      const byteArray = new Uint8Array(byteNumbers);
+      return new Blob([byteArray], { type: contentType });
+    }
+
+    public getImage(imageId: string): SafeUrl | null {
+      console.log(typeof(this.imageCache.get(imageId)));
+      return this.imageCache.get(imageId) || null;
+    }
 
     private async fetchImage(path: string, signedRequest: any): Promise<SafeUrl | null> {
       try{
