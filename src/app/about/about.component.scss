@@ -54,7 +54,7 @@
 
 @media(min-width: 901px) {
     .about__text {
-        flex: 0 0 35%                                                     /* container will not grow with excess space and not shrink if there isnt enough, item is set to 35% */
+        flex: 0 0 50%                                                     /* container will not grow with excess space and not shrink if there isnt enough, item is set to 35% */
     }
     
     .about__photo-container {

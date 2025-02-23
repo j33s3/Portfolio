@@ -9,9 +9,7 @@
                     <div *ngIf="data">
                         <div *ngFor="let about of data" class="about__content">
                             <div class="about__text">
-                                <p>
-                                    {{ about.aboutDescription }}
-                                </p>
+                                <p [innerHTML]="about.aboutDescription"></p>
                                 <a href="../../assets/files/Peterson, Jesse Resume.pdf" target="_blank" class="btn">My Resume</a>
                             </div>
                             <div class="about__photo-container">

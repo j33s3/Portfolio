@@ -15,40 +15,17 @@ export class ImageDisplayComponent implements OnInit{
   @Input() imageType!: string;    // Dictates Projects || About
   @Input() importStyle: { [key: string]: string } = {};
   @Input() isShowcase: boolean = false; 
-  imageUrl: SafeUrl | null = null;
+  imageUrl!: SafeUrl;
 
-
-
-  get fullImageUrl(): string {
-    return `http://localhost:4000/prod/projects/image/${this.imageUrl}`
-  }
 
   constructor(private apiService: ApiService) { }
 
   async ngOnInit() {
-    this.imageUrl = this.apiService.getImage(this.imageId);
-    console.log(`this is the image URL ${this.imageUrl}`);
-    console.log(`this is the image ID ${this.imageId}`);
-
-
+    try{
+      const blob = this.imageType == 'projects' ? await this.apiService.getProjects_Image(this.imageId) : await this.apiService.getAbout_Image(this.imageId);
+      this.imageUrl = blob;
+    } catch (error) {
+      console.error("Error fetching image: ", error);
+    }
   }
-
-  // async ngOnInit() {
-  //   try{
-  //     const blob = this.imageType == 'projects' ? await this.apiService.getProjects_Image(this.imageId) : await this.apiService.getAbout_Image(this.imageId);
-  //     if(this.imageType == 'details') {
-  //       this.imageUrl = await this.apiService.getAllProject_Images(this.imageId);
-  //     }
-  //     else if (this.imageType == 'projects') {
-  //       this.imageUrl = await this.apiService.getProjects_Image(this.imageId);
-  //     }
-  //     else if (this.imageType == 'about') {
-  //       this.imageUrl = await this.apiService.getAbout_Image(this.imageId);
-  //     } else {
-  //       console.error('Could not processes the request type')
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching image: ", error);
-  //   }
-  // }
 }

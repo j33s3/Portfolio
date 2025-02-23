@@ -143,7 +143,7 @@ body {
 
 @media(max-width: 900px) {
     .work__box {
-        align-items: initial;
+        align-items: center;
         flex-direction: column-reverse;
     }
 }
@@ -209,6 +209,7 @@ body {
     flex: 1 1 ;
     height: auto;
     max-width: 650px;
+    
 }
 
 @media(max-width: 1700px) {

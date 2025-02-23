@@ -4,12 +4,12 @@ import { ActivatedRoute } from '@angular/router';
 
 import { NavbarComponent } from '../../navbar/navbar.component';
 import { ApiService } from '../../services/api.service';
-import { ImageDisplayComponent } from '../../image-display/image-display.component';
+import { SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-work-details',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, ImageDisplayComponent],
+  imports: [CommonModule, NavbarComponent],
   templateUrl: './work-details.component.html',
   styleUrl: './work-details.component.scss'
 })
@@ -17,11 +17,21 @@ export class WorkDetailsComponent implements OnInit, AfterViewInit {
 
   project!: any;
   projectId: any;
+  images!: Map<string, SafeUrl>
+  
 
   private recycled = false;
 
   constructor(private route: ActivatedRoute, private apiService: ApiService) {
     this.projectId = this.route.snapshot.paramMap.get('id');
+    this.apiService.getImageMap(this.projectId).subscribe(imageMap => {
+      if (imageMap) {
+        imageMap.forEach((SafeUrl, key) => {
+        });
+
+        this.images = imageMap;
+      }
+    })
   }
 
   async ngOnInit(): Promise<void> {
@@ -37,7 +47,8 @@ export class WorkDetailsComponent implements OnInit, AfterViewInit {
       await this.fetchData();
     }
 
-    await this.apiService.fetchAllProject_Images(this.projectId);
+
+
   }
 
   async ngAfterViewInit(): Promise<void> {

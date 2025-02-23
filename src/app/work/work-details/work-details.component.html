@@ -24,7 +24,7 @@
             <!-- Head project image and description -->
             <section>
                 <div *ngIf="project else loading" class="project__header-box">
-                     <app-image-display class="project__header-image"  [imageId]="project._id" imageType="projects"></app-image-display>
+                    <img *ngIf="images?.has(project._id)" [src]="images.get(projectId)" class="project__header-image">
                     <p [innerHTML]="project.projectDescription"></p>
                 </div>
             </section>
@@ -39,7 +39,7 @@
                         </div>
     
                         <div class="status__picture">
-                            <app-image-display [parentId]="projectId" [imageId]="project._id + '_' + item._id" imageType="projects"></app-image-display>
+                            <img *ngIf="images?.has(project._id + '_' + item._id)" [src]="images.get(project._id + '_' + item._id) " class="status__picture">
                         </div>
                     </div>
                 </div>

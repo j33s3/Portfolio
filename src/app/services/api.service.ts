@@ -7,7 +7,8 @@ import { Sha256 } from '@aws-crypto/sha256-js';
 import { StsAuthService } from './sts-auth.service';
 
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, catchError, first, map, Observable, of, switchMap, tap } from 'rxjs';
+import { from } from 'rxjs';
 
 
 
@@ -17,7 +18,7 @@ import { BehaviorSubject } from 'rxjs';
 export class ApiService {
   url = new URL(environment.STSUrl);
   private imageCache = new Map<string, SafeUrl | null>();
-  private images$ = new BehaviorSubject<Map<string, SafeUrl | null>>(new Map());
+  private imageFetchStatus = new Map<string, BehaviorSubject<boolean>>();
 
   constructor(private sanitizer: DomSanitizer, private stsAuthService: StsAuthService) { }
 
@@ -34,16 +35,35 @@ export class ApiService {
   }
 
   /*       Getting Images       */
-  async getProjects_Image(imageId: String,): Promise<any> {
+  async getProjects_Image(imageId: string,): Promise<any> {
     return this.makeAPICall(`projects/image/${imageId}`, true);
   }
 
-  async getAllProject_Images(documentId: string): Promise<BehaviorSubject<Map<string, SafeUrl | null>>> {
-    return this.images$; 
-  }
+  fetchAllProject_Images(documentId: string): Observable<boolean>{
 
-  async fetchAllProject_Images(documentId: string) {
-    this.makeAPICall(`projects/get-all-images/${documentId}`, true, true);
+    // Checks to see if the contents have been cached already
+    if(!this.imageFetchStatus.has(documentId)) {
+      this.imageFetchStatus.set(documentId, new BehaviorSubject<boolean>(false))
+    }
+
+    const statusSubject = this.imageFetchStatus.get(documentId)!;
+
+
+    return from(
+      this.makeAPICall(`projects/get-all-images/${documentId}`, true, true)
+    ).pipe(
+      tap(() => {
+        statusSubject.next(true)
+
+      }),
+      catchError(() => {
+        statusSubject.next(false);
+        return of(false);
+      }),
+      
+      switchMap(() => statusSubject.asObservable())
+    );
+
   }
 
   /*       Getting Details       */
@@ -212,7 +232,6 @@ export class ApiService {
 
 
     private async fetchAllImages(path: string, signedRequest: any) {   
-      console.log(`${environment.baseUrl}${path}`);   
       try{
         const response = await fetch(`${environment.baseUrl}${path}`, {
           method: signedRequest.method,
@@ -221,35 +240,26 @@ export class ApiService {
         
         if(!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
-        console.log(response);
 
         var images = await response.json();
-        images = JSON.stringify(images, null, 2);
-        images = JSON.parse(images);
-        // console.log(`yus sir ${JSON.stringify(images, null, 2)}`);
-        console.log(images);
-        this.cacheImages(path.split('/').pop() as string, images);
-
-        this.images$.next(new Map(this.imageCache));
-
+        await this.cacheImages(path.split('/').pop() as string, images)
+        
 
       } catch(error) {
         console.error('Error fetching image: ', error);
       }
     }
 
-    private cacheImages(parentId: string, images: any) {
+    private async cacheImages(parentId: string, images: any): Promise<void> {
       if (images.projectPicture) {
-        this.imageCache.set(`${parentId}`, this.createSafeUrl(images.projectPicture, images.contentType))
+        this.imageCache.set(`${parentId}`, this.createSafeUrl(images.projectPicture, images.contentType));
       }
 
       for (let status of images.projectStatuses) {
         this.imageCache.set(`${parentId}_${status._id}`, this.createSafeUrl(status.statusPicture, status.contentType));
-        console.log(this.imageCache.get(`${parentId}_${status._id}`))
       }
 
-      this.images$.next(new Map(this.imageCache));
-
+      return Promise.resolve();
     }
 
     private createSafeUrl(base64String: string, contentType: string): SafeUrl {
@@ -265,10 +275,43 @@ export class ApiService {
       return new Blob([byteArray], { type: contentType });
     }
 
-    public getImage(imageId: string): SafeUrl | null {
-      console.log(typeof(this.imageCache.get(imageId)));
-      return this.imageCache.get(imageId) || null;
+    public getImage(imageId: string): SafeUrl | null | undefined{
+
+
+
+      if(!this.imageCache.has(imageId)) {
+        var parentId = imageId;
+        if(imageId.length !== 24) {
+          parentId = imageId.slice(0, 24);
+        }
+
+        this.fetchAllProject_Images(parentId).subscribe((error) => {
+          return this.imageCache.get(imageId);
+        })
+
+        // this.makeAPICall(`projects/get-all-images/${parentId}`, true, true);
+      } else {
+        return this.imageCache.get(imageId);
+      }
+      return null;
     }
+
+    public getImageMap(documentId: string): Observable<Map<string, SafeUrl>> {
+      return this.fetchAllProject_Images(documentId).pipe(
+        first(), // Only take the first emitted value
+        map(() => {
+          // Filter out any null values before returning
+          const filteredCache = new Map<string, SafeUrl>();
+          this.imageCache.forEach((value, key) => {
+            if (value !== null) { // Ensure only valid SafeUrls are added
+              filteredCache.set(key, value);
+            }
+          });
+          return filteredCache;
+        })
+      );
+    }
+    
 
     private async fetchImage(path: string, signedRequest: any): Promise<SafeUrl | null> {
       try{
