@@ -1,6 +1,6 @@
 <div class="slider__container">
-    <div class="work-slider">
-        <!-- <div class="work-track"> -->
+    <div *ngIf="images else loading">
+        <div class="work-slider">
             <div *ngFor="let image of images" 
                     [ngStyle]="{ transform: 'translateX(' + offset + '%)'}"
                     (mouseenter)="pauseSlider()"
@@ -11,8 +11,12 @@
                     </a>
     
             </div>
-        <!-- </div> -->
+        </div>
     </div>
 </div>
 
+
+<ng-template #loading>
+    <p>Loading project details...</p>
+</ng-template>
 

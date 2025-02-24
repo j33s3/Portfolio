@@ -99,7 +99,7 @@ export class WorkSliderComponent implements OnInit, AfterViewInit{
     }
 
     updateImageOffsets() {
-        this.offset -= 0.3;
+        this.offset -= 0.2;
 
         if (this.offset <= (this.images.length -4) * -109.5) {
             this.offset = 0;
