@@ -16,7 +16,7 @@ import { After } from 'node:v8';
 })
 export class AboutComponent implements OnInit, AfterViewInit{
 
-  data: any[] = []
+  data: any
 
   private recycled: boolean = false;
 
@@ -47,7 +47,7 @@ export class AboutComponent implements OnInit, AfterViewInit{
   private async fetchData() {
     this.apiService.getAbout()
     .then(data => {
-      this.data = data
+      this.data = data[0]
       sessionStorage.setItem('aboutData', JSON.stringify(this.data));  
     })
     .catch(error => {

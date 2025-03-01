@@ -67,41 +67,47 @@
 
 
                  <!-- All Projects -->
-                 <div *ngFor="let projects of data">
-                    <div class="work__box">
-                        <div class="work__text">
-                            <h2>{{ projects.projectName }}</h2>
-                            <div class="project">
-                                <p class="project__description">{{ projects.projectBriefing }}</p>
-                            </div>
-    
-                            <div class="bottom__left-container">
-                                <div class="work__list">
-                                    <ul *ngFor="let skill of projects.projectSkills" >
-                                        <li>{{ skill.skill }}</li>
-                                    </ul>
+                  <div *ngIf="data else loading">
+                    <div *ngFor="let projects of data">
+                        <div class="work__box">
+                            <div class="work__text">
+                                <h2>{{ projects.projectName }}</h2>
+                                <div class="project">
+                                    <p class="project__description">{{ projects.projectBriefing }}</p>
                                 </div>
-
-
-                                <div class="work__links">
-                                    <a [href]=projects.projectLink title="View Source Code" target="_blank">
-                                        <div class="work__code-wrapper">
-                                            <object data="../../../assets/images/github.svg" type="image/svg+xml" style="pointer-events: none;" class="work__code" alt="GitHub"></object>
-                                        </div>
-                                    </a>
+        
+                                <div class="bottom__left-container">
+                                    <div class="work__list">
+                                        <ul *ngFor="let skill of projects.projectSkills" >
+                                            <li>{{ skill.skill }}</li>
+                                        </ul>
+                                    </div>
+    
+    
+                                    <div class="work__links">
+                                        <a [href]=projects.projectLink title="View Source Code" target="_blank">
+                                            <div class="work__code-wrapper">
+                                                <object data="../../../assets/images/github.svg" type="image/svg+xml" style="pointer-events: none;" class="work__code" alt="GitHub"></object>
+                                            </div>
+                                        </a>
+                                    </div>
+        
+                                    <a [href]="'/details/' + projects._id" class="more-btn">More Details</a>
                                 </div>
-    
-                                <a [href]="'/details/' + projects._id" class="more-btn">More Details</a>
+        
                             </div>
-    
-                        </div>
-                        <div class="work__picture">
-                             <app-image-display [imageId]="projects._id" imageType="projects"></app-image-display>
-                        </div>
-                      </div>
-                 </div>
+                            <div class="work__picture">
+                                 <app-image-display [imageId]="projects._id" imageType="projects"></app-image-display>
+                            </div>
+                          </div>
+                     </div>
+                  </div>
+                 
                  
             </div>
         </div>
     </body>
 
+    <ng-template #loading>
+        <p>Loading project details...</p>
+      </ng-template>

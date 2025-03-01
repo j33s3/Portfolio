@@ -7,7 +7,7 @@ import { SafeUrl } from '@angular/platform-browser';
   selector: 'app-image-display',
   standalone: true,
   imports: [CommonModule],
-  template: '<img *ngIf="imageUrl" [src]="imageUrl" alt="Fetched Image" [ngStyle]="importStyle">'
+  templateUrl: './image-display.component.html'
 })
 export class ImageDisplayComponent implements OnInit{
   @Input() parentId!: string;

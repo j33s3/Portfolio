@@ -6,18 +6,16 @@
 
                 <div class="row">
                     <h1>About Me</h1>
-                        <div  *ngIf="data">
-                            <div *ngFor="let about of data" class="about__content">
-                                <div class="about__text">
-                                    <p [innerHTML]="about.aboutDescription"></p>
+                            <div class="about__content">
+                                <div *ngIf="data else loading" class="about__text">
+                                    <p [innerHTML]="data.aboutDescription"></p>
                                     <a href="../../assets/files/Peterson, Jesse Resume.pdf" target="_blank" class="btn">My Resume</a>
                                 </div>
                                 <div class="about__photo-container">
-                                    <app-image-display [imageId]="about._id" imageType="about"></app-image-display>
+                                    <app-image-display [imageId]="data._id" imageType="about"></app-image-display>
                                 </div>
                             </div>
                     </div>
-                </div>   
 
 
         <div class="ocean">
@@ -31,5 +29,5 @@
 
 
 <ng-template #loading>
-    <p>Loading project details...</p>
+    <p>Loading Description...</p>
 </ng-template>

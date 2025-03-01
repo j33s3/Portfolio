@@ -1,5 +1,5 @@
 <div class="slider__container">
-    <div *ngIf="images else loading">
+    <div *ngIf="images.length > 0; else loading">
         <div class="work-slider">
             <div *ngFor="let image of images" 
                     [ngStyle]="{ transform: 'translateX(' + offset + '%)'}"
@@ -17,6 +17,6 @@
 
 
 <ng-template #loading>
-    <p>Loading project details...</p>
+    <p style="font-size: 2.5rem;">Loading project details...</p>
 </ng-template>
 
