@@ -30,7 +30,7 @@ jobs:
         echo "AWS_S3_BUCKET=${{ secrets.AWS_S3_BUCKET }}" >> $GITHUB_ENV
 
     - name: Build Angular project
-      run: npx ng build --prod
+      run: npx ng build --configuration production
 
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
