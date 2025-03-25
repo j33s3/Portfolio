@@ -1,0 +1,7 @@
+
+<img *ngIf="imageUrl else loading" [src]="imageUrl" alt="Fetched Image" [ngStyle]="importStyle">
+
+
+<ng-template #loading>
+    <p>Loading image...</p>
+  </ng-template>

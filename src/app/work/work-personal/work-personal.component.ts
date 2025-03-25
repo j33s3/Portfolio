@@ -1,47 +1,60 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../navbar/navbar.component';
-import { environment } from '../../../environment/environment';
+import { ApiService } from '../../services/api.service';
+import { ImageDisplayComponent } from '../../image-display/image-display.component';
+
 
 @Component({
   selector: 'app-work-personal',
   standalone: true,
-  imports: [CommonModule, NavbarComponent],
+  imports: [CommonModule, NavbarComponent, ImageDisplayComponent],
   templateUrl: './work-personal.component.html',
   styleUrl: '../work.scss'
 })
 
 
-export class WorkPersonalComponent implements OnInit {
-  baseUrl = environment.dbBaseUrl;
+export class WorkPersonalComponent implements OnInit, AfterViewInit {
 
-    data: any[] = [];
+  private recycled: boolean = false
+
+  data: any[] = [];
+
+  constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
-      this.fetchData()
+    const cachedData = sessionStorage.getItem('personalData');
+    if(cachedData && !cachedData.includes('"Internal Server Error"') && !cachedData.includes('"Forbidden"') && cachedData != 'null') {
+      this.data = JSON.parse(cachedData);
+      console.log('Using Cached Data');
+      this.recycled = true;
+    }
+    else {
+      this.fetchData();
+    }
+  }
+
+  ngAfterViewInit(): void {
+    if(this.recycled) {
+      const dbversion = this.apiService.getDBVersion();
+      if(this.data[0].dbVersion != dbversion) {
+        this.fetchData();
+      }
+    }
   }
 
 
 
-  fetchData(): void {
-    const projectsPage = `${this.baseUrl}/projects/personal`;
-    
-    fetch(projectsPage)
-    .then(response => {
-      if(!response.ok){
-        throw new Error(`HTTP error! status: ${response.status}`)
-      }
-      return response.json();
-    })
+  private async fetchData() {
+    this.apiService.getProjects_Personal()
     .then(data => {
-      this.data = data;
-      sessionStorage.setItem('personalData', JSON.stringify(this.data));
+      this.data = data
+      sessionStorage.setItem('personalData', JSON.stringify(this.data));  
     })
     .catch(error => {
-      console.error('Error fetching data', error);
+      console.error('An error occured fetching personal work: ', error);
+      return null;
     })
-    
   }
-
 
 }

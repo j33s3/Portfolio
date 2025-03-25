@@ -1,69 +1,71 @@
-import { Component, OnInit, ElementRef, AfterViewInit, ViewChild} from "@angular/core";
+import { Component, OnInit, ElementRef, AfterViewInit, ViewChild, OnDestroy} from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { environment } from "../../environment/environment";
+import { ApiService } from "../services/api.service";
+import { ImageDisplayComponent } from '../image-display/image-display.component' 
 
 @Component({
     selector: 'app-work-slider',
     standalone: true,
     templateUrl: './work-slider.component.html',
     styleUrls: ['./work-slider.component.scss'],
-    imports: [CommonModule]
+    imports: [CommonModule, ImageDisplayComponent],
+    providers: [ApiService]
 })
 
 
 
-export class WorkSliderComponent implements OnInit, AfterViewInit {
-    baseUrl = environment.dbBaseUrl;
-
-
-
+export class WorkSliderComponent implements OnInit, AfterViewInit{
 
     offset: number = 0;
     data: any[] = [];
-    images: {ID: string, Name: string}[] = [];
+    images: {ID: string, Name: string}[] = []
 
-    private rafId: number = 0;
+    private intervalId: any = null;
+    private recycled: boolean = false;
     private isPaused: boolean = false;
-    private windowW: number = window.innerWidth;
+    
 
-    constructor() { }
+
+    constructor(private apiService: ApiService) { }
 
     ngOnInit(): void {
-        this.fetchData();
-        if (typeof window === 'undefined' || !('requestAnimationFram' in window)) {                     // Warn that the browser is not compatable
-            console.warn('requestAnimationFram is not available in this environment');
+        // Assign the cached data
+        const cachedData = sessionStorage.getItem('showcaseIDs');
+        
+        // If the data is still valid then use it
+        if(cachedData && !cachedData.includes('"Internal Server Error"') && !cachedData.includes('"Forbidden"') && cachedData != 'null') {
+            this.data = JSON.parse(cachedData);
+            this.recycled = true;
+        } 
+
+        // Else start the fetch process
+        else {
+            this.fetchData();
+            this.addImages();
         }
 
+        // Warn that the browser is not compatable
+        if (typeof window === 'undefined' || !('requestAnimationFrame' in window)) {                     
+            console.warn('requestAnimationFram is not available in this environment');
+        }
     }
 
-    //**   Fetching Image IDs   **//
+    // After the view is established
+    ngAfterViewInit(): void {
+        this.startSlider();
 
-    fetchData(): void {
-        const showcasePath = `${this.baseUrl}/projects/showcase`;
-
-        fetch(showcasePath)
-        .then(response => {
-            if(!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+        // If data is reused
+        if (this.recycled) {
+            // Check is the DB version is accurate
+            const dbVersion = this.apiService.getDBVersion();
+            if(this.data[0].dbversion != dbVersion) {
+                // If not then fetch new data
+                this.fetchData();
             }
-            return response.json();
-        })
-        .then(data => {
-            this.data = data;
-            sessionStorage.setItem('showcaseIDs', JSON.stringify(this.data));
-            this.addImages();
-        })
-        .catch(error => {
-            console.error('Error fetching data', error);
-        })
+        }
     }
 
-
-
-
-    addImages() {
-
-
+    private addImages() {
         for( let image of this.data ) {                                                                 // This Places the initial pictures into the set
             this.images.push({ID: image._id, Name: image.projectName})
         }
@@ -71,65 +73,45 @@ export class WorkSliderComponent implements OnInit, AfterViewInit {
         for(let i = 0; i < 4; i++) {                                                                    // This places 4 extra images at the end for a smooth transition
             this.images.push({ID: this.data[i]._id, Name: this.data[i].projectName})
         }
-
     }
 
-    //**   Animation   **//
-
-    ngAfterViewInit(): void {                                                                           // Once view is loaded start the slider
-        this.startSlider();
+    private fetchData() {
+        this.apiService.getProjects_Showcase()
+        .then(data => {
+          this.data = data
+          sessionStorage.setItem('showcaseIDs', JSON.stringify(this.data)); 
+          this.addImages();
+        })
+        .catch(error => {
+          console.error('An error occured fetching showcase Ids: ', error);
+          return null;
+        })
     }
 
+    startSlider() {
+        if(this.intervalId) return;
 
-
-    startSlider() {                                                                                     
-        const updateImages = () => {                                                                    // recursivly calls the updateImagesOffset untill hover
-            if(this.isPaused) return;
-            this.updateImagesOffsets();
-            this.rafId = requestAnimationFrame(updateImages);
-        };
-        updateImages();
-    }
-
-    updateImagesOffsets() {
-        
-
-
-
-
-        this.images = this.images.map((image) => {                                                      // Set the offset and if it is greater, move frame to beggining
-            this.offset -= 0.05;
-            
-            // if (this.offset <= (this.images.length - 4) * -108.5) {
-            //     this.offset = 0;
-            // }
-
-            if (this.offset <= (this.images.length - 4) * -109.5) {
-                this.offset = 0;
+        this.intervalId = setInterval(() => {
+            if(!this.isPaused) {
+                this.updateImageOffsets();
             }
-
-            return image;
-        });
+        }, 8); // Runs at ~60fps (1000ms / 60 = ~16ms per frame);
     }
 
+    updateImageOffsets() {
+        this.offset -= 0.2;
+
+        if (this.offset <= (this.images.length -4) * -109.5) {
+            this.offset = 0;
+        }
+    }
 
     pauseSlider() {
-        if (this.rafId) {                                                                               // Cancel the animation and set status to paused
-            cancelAnimationFrame(this.rafId);
-            this.rafId = 0;
-        }
         this.isPaused = true;
     }
 
-    resumeSlider() {                                                                                    // Set status to playing and call the startSlider function again
+    resumeSlider() {
         this.isPaused = false;
-        this.startSlider();
     }
 
-
-    ngOnDestroy(): void {                                                                               // Reset Contents to clear memory
-        if(this.rafId) {
-            cancelAnimationFrame(this.rafId);
-        }
-    }
 }

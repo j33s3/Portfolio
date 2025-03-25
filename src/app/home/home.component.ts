@@ -15,6 +15,5 @@ export class HomeComponent {
   constructor() {
     console.log('HomeComponent Initialized');
   }
-  title = 'Welcome to My Portfolio';
 
 }

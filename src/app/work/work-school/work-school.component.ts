@@ -1,44 +1,56 @@
 import { Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../navbar/navbar.component';
-import { environment } from '../../../environment/environment';
+import { ApiService } from '../../services/api.service';
+import { ImageDisplayComponent } from '../../image-display/image-display.component';
+import fs from 'fs';
 
 @Component({
   selector: 'app-work-school',
   standalone: true,
-  imports: [CommonModule, NavbarComponent],
+  imports: [CommonModule, NavbarComponent, ImageDisplayComponent],
   templateUrl: './work-school.component.html',
   styleUrl: '../work.scss'
 })
 export class WorkSchoolComponent implements OnInit {
-  baseUrl = environment.dbBaseUrl;
 
   data!: any[]
 
+  private recycled: boolean = false;
+
+  constructor(private apiService: ApiService) { }
+
   ngOnInit(): void {
-    this.fetchData();
+    const cachedData = sessionStorage.getItem('schoolData');
+    if(cachedData && !cachedData.includes('"Internal Server Error"') && !cachedData.includes('"Forbidden"') && cachedData != 'null') {
+      this.data = JSON.parse(cachedData);
+      console.log('Using Cached Data');
+      this.recycled = true;
+    }
+    else {
+      this.fetchData();
+    }
   }
 
-  fetchData(): void {
-    const projectsPage = `${this.baseUrl}/projects/school`;
-
-    fetch(projectsPage)
-    .then(response => {
-      if(!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+  ngAfterViewInit(): void {
+    if(this.recycled) {
+      const dbversion = this.apiService.getDBVersion();
+      if(this.data[0].dbVersion != dbversion) {
+        this.fetchData();
       }
-      return response.json();
-    })
+    }
+  }
+
+  private async fetchData() {
+    this.apiService.getProjects_School()
     .then(data => {
-      this.data = data;
-      sessionStorage.setItem('schoolData', JSON.stringify(this.data));
+      this.data = data
+      sessionStorage.setItem('schoolData', JSON.stringify(this.data));  
     })
     .catch(error => {
-      console.error('Error fetching data', error);
+      console.error('An error occured fetching school work: ', error);
+      return null;
     })
   }
-
-
-
 
 }
