@@ -21,6 +21,9 @@ jobs:
     - name: Installing Dependencies
       run: npm install
 
+    - name: Installing Angular CLI
+      run: npm install -g @angular/cli
+
     - name: Set environment variables
       run: |
         echo "AWS_API_BASE_URL=${{ secrets.AWS_API_BASE_URL }}" >> $GITHUB_ENV
