@@ -8,9 +8,26 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+
+    - name: Installing Dependencies
+      run: npm install
+
+    - name: Set environment variables
+      run: |
+        echo "AWS_API_BASE_URL=${{ secrets.AWS_API_BASE_URL }}" >> $GITHUB_ENV
+        echo "AWS_S3_BUCKET=${{ secrets.AWS_S3_BUCKET }}" >> $GITHUB_ENV
+
+    - name: Build Angular project
+      run: npx ng build --prod
 
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -23,4 +40,4 @@ jobs:
       run: echo "AWS_API_BASE_URL=${{ secrets.AWS_API_BASE_URL }}" >> $GITHUB_ENV
 
     - name: Deploy website to S3 bucket
-      run: aws s3 sync ./s3://${{ secrets.AWS_S3_BUCKET }} --delete --exclude '.git/*' --exclude '.github/*' --exclude '.gitignore'
+      run: aws s3 sync ./dist/ --delete --exclude '.git/*' --exclude '.github/*' --exclude '.gitignore' s3://${{ secrets.AWS_S3_BUCKET }}
