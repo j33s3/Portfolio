@@ -5,10 +5,10 @@ import { ImageDisplayComponent } from '../image-display/image-display.component'
 
 @Component({
     selector: 'app-work-slider',
-    standalone: true,
     templateUrl: './work-slider.component.html',
     styleUrls: ['./work-slider.component.scss'],
     imports: [CommonModule, ImageDisplayComponent],
+    standalone: true,
     providers: [ApiService]
 })
 

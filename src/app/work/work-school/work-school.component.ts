@@ -6,11 +6,11 @@ import { ImageDisplayComponent } from '../../image-display/image-display.compone
 import fs from 'fs';
 
 @Component({
-  selector: 'app-work-school',
-  standalone: true,
-  imports: [CommonModule, NavbarComponent, ImageDisplayComponent],
-  templateUrl: './work-school.component.html',
-  styleUrl: '../work.scss'
+    selector: 'app-work-school',
+    imports: [CommonModule, NavbarComponent, ImageDisplayComponent],
+    standalone: true,
+    templateUrl: './work-school.component.html',
+    styleUrl: '../work.scss'
 })
 export class WorkSchoolComponent implements OnInit {
 

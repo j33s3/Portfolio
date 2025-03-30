@@ -7,11 +7,11 @@ import { ApiService } from '../../services/api.service';
 import { SafeUrl } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-work-details',
-  standalone: true,
-  imports: [CommonModule, NavbarComponent],
-  templateUrl: './work-details.component.html',
-  styleUrl: './work-details.component.scss'
+    selector: 'app-work-details',
+    imports: [CommonModule, NavbarComponent],
+    standalone: true,
+    templateUrl: './work-details.component.html',
+    styleUrl: './work-details.component.scss'
 })
 export class WorkDetailsComponent implements OnInit, AfterViewInit {
 

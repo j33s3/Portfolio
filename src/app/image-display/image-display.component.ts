@@ -4,10 +4,10 @@ import { CommonModule } from '@angular/common';
 import { SafeUrl } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-image-display',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './image-display.component.html'
+    selector: 'app-image-display',
+    imports: [CommonModule],
+    standalone: true,
+    templateUrl: './image-display.component.html'
 })
 export class ImageDisplayComponent implements OnInit{
   @Input() parentId!: string;

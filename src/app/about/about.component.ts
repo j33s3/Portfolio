@@ -8,11 +8,11 @@ import { After } from 'node:v8';
 
 
 @Component({
-  selector: 'app-about',
-  standalone: true,
-  imports: [CommonModule, NavbarComponent, ImageDisplayComponent],
-  templateUrl: './about.component.html',
-  styleUrl: './about.component.scss'
+    selector: 'app-about',
+    imports: [CommonModule, NavbarComponent, ImageDisplayComponent],
+    standalone: true,
+    templateUrl: './about.component.html',
+    styleUrl: './about.component.scss'
 })
 export class AboutComponent implements OnInit, AfterViewInit{
 

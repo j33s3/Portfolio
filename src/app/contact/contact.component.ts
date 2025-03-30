@@ -4,11 +4,11 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { ApiService } from '../services/api.service';
 
 @Component({
-  selector: 'app-contact',
-  standalone: true,
-  imports: [CommonModule, NavbarComponent],
-  templateUrl: './contact.component.html',
-  styleUrl: './contact.component.scss'
+    selector: 'app-contact',
+    imports: [CommonModule, NavbarComponent],
+    standalone: true,
+    templateUrl: './contact.component.html',
+    styleUrl: './contact.component.scss'
 })
 export class ContactComponent implements OnInit {
 

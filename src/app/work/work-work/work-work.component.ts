@@ -5,11 +5,11 @@ import { ApiService } from '../../services/api.service';
 import { ImageDisplayComponent } from '../../image-display/image-display.component';
 
 @Component({
-  selector: 'app-work-work',
-  standalone: true,
-  imports: [CommonModule, NavbarComponent, ImageDisplayComponent],
-  templateUrl: './work-work.component.html',
-  styleUrl: '../work.scss'
+    selector: 'app-work-work',
+    imports: [CommonModule, NavbarComponent, ImageDisplayComponent],
+    standalone: true,
+    templateUrl: './work-work.component.html',
+    styleUrl: '../work.scss'
 })
 export class WorkWorkComponent implements OnInit, AfterViewInit{
 

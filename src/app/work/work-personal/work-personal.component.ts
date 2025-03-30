@@ -6,11 +6,11 @@ import { ImageDisplayComponent } from '../../image-display/image-display.compone
 
 
 @Component({
-  selector: 'app-work-personal',
-  standalone: true,
-  imports: [CommonModule, NavbarComponent, ImageDisplayComponent],
-  templateUrl: './work-personal.component.html',
-  styleUrl: '../work.scss'
+    selector: 'app-work-personal',
+    imports: [CommonModule, NavbarComponent, ImageDisplayComponent],
+    standalone: true,
+    templateUrl: './work-personal.component.html',
+    styleUrl: '../work.scss'
 })
 
 
