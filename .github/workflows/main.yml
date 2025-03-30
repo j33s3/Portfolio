@@ -27,7 +27,7 @@ jobs:
     - name: Set environment variables
       run: |
         echo "AWS_API_BASE_URL=${{ secrets.AWS_API_BASE_URL }}" >> $GITHUB_ENV
-        echo "AWS_S3_BUCKET=${{ secrets.AWS_S3_BUCKET }}" >> $GITHUB_ENV
+        echo "AWS_API_STS_URL=${{ secrets.AWS_API_STS_URL }}" >> $GITHUB_ENV
 
     - name: Build Angular project
       run: npx ng build --configuration production
