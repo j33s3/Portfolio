@@ -32,6 +32,9 @@ jobs:
     - name: Build Angular project
       run: npx ng build --configuration production
 
+    - name: Debug - Check build output
+      run: ls -R ./dist/
+
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -39,8 +42,15 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-west-2
 
+    - name: Check injected environment variables in main.js
+      run: |
+        head -n 10 dist/portfolio/main.*
+
+    - name: Debug - print environment.prod.ts
+      run: cat ./src/environment/environment.prod.ts
+
     - name: Set AWS API Base URL environment variable
       run: echo "AWS_API_BASE_URL=${{ secrets.AWS_API_BASE_URL }}" >> $GITHUB_ENV
 
     - name: Deploy website to S3 bucket
-      run: aws s3 sync ./dist/portfolio/browser/* s3://${{ secrets.AWS_S3_BUCKET }} --delete --exclude '.git/*' --exclude '.github/*' --exclude '.gitignore' 
+      run: aws s3 sync ./dist/portfolio/ s3://${{ secrets.AWS_S3_BUCKET }} --delete --exclude '.git/*' --exclude '.github/*' --exclude '.gitignore' 
