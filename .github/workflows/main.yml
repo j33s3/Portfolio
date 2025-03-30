@@ -44,7 +44,7 @@ jobs:
 
     - name: Check injected environment variables in main.js
       run: |
-        head -n 10 dist/portfolio/main.js
+        head -n 10 dist/portfolio/main.*
 
     - name: Debug - print environment.prod.ts
       run: cat ./src/environment/environment.prod.ts
