@@ -43,4 +43,4 @@ jobs:
       run: echo "AWS_API_BASE_URL=${{ secrets.AWS_API_BASE_URL }}" >> $GITHUB_ENV
 
     - name: Deploy website to S3 bucket
-      run: aws s3 sync ./dist/ --delete --exclude '.git/*' --exclude '.github/*' --exclude '.gitignore' s3://${{ secrets.AWS_S3_BUCKET }}
+      run: aws s3 sync ./dist/portfolio/browser/* s3://${{ secrets.AWS_S3_BUCKET }} --delete --exclude '.git/*' --exclude '.github/*' --exclude '.gitignore' 
