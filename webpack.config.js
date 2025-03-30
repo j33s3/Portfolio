@@ -13,10 +13,8 @@ module.exports = {
     plugins: [
         // Inject environment variables into the build
         new webpack.DefinePlugin({
-            'process.env': {
-                AWS_API_BASE_URL: JSON.stringify(process.env.AWS_API_BASE_URL),
-                AWS_API_STS_URL: JSON.stringify(process.env.AWS_API_STS_URL)
-            }
+                'process.env.AWS_API_BASE_URL': JSON.stringify(process.env.AWS_API_BASE_URL),
+                'process.env.AWS_API_STS_URL': JSON.stringify(process.env.AWS_API_STS_URL)
         })
     ]
 };
