@@ -42,6 +42,13 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-west-2
 
+
+    - name: Debug - print environment.prod.ts
+      run: cat ./src/environment/environment.prod.ts
+
+    - name: Debug - print .env file contents
+      run: cat .env
+
     - name: Set AWS API Base URL environment variable
       run: echo "AWS_API_BASE_URL=${{ secrets.AWS_API_BASE_URL }}" >> $GITHUB_ENV
 
