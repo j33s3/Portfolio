@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit} from '@angular/core';
+import { MarkdownModule } from 'ngx-markdown';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../navbar/navbar.component';
 import { ApiService } from '../../services/api.service';
@@ -7,15 +8,17 @@ import { ImageDisplayComponent } from '../../image-display/image-display.compone
 
 @Component({
     selector: 'app-work-personal',
-    imports: [CommonModule, NavbarComponent, ImageDisplayComponent],
+    imports: [CommonModule, NavbarComponent, ImageDisplayComponent, MarkdownModule],
     standalone: true,
     templateUrl: './work-personal.component.html',
     styleUrl: '../work.scss'
 })
 
 
-export class WorkPersonalComponent implements OnInit, AfterViewInit {
 
+
+export class WorkPersonalComponent implements OnInit, AfterViewInit {
+  markdownText = '# Hello markdown!';
   private recycled: boolean = false
 
   data: any[] = [];

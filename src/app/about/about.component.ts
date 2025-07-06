@@ -18,6 +18,8 @@ export class AboutComponent implements OnInit, AfterViewInit{
 
   data: any
 
+
+
   private recycled: boolean = false;
 
   constructor(private apiService: ApiService) {}

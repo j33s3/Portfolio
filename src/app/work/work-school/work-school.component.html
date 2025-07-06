@@ -67,41 +67,114 @@
 
 
                  <!-- All Projects -->
-                  <div *ngIf="data else loading">
-                    <div *ngFor="let projects of data">
                         <div class="work__box">
                             <div class="work__text">
-                                <h2>{{ projects.projectName }}</h2>
+                                <h2>Trucking Document Server</h2>
                                 <div class="project">
-                                    <p class="project__description">{{ projects.projectBriefing }}</p>
+                                    <p class="project__description">A CLI to execute CRUD operations on a MySQL database persisting of freighting information</p>
                                 </div>
         
                                 <div class="bottom__left-container">
                                     <div class="work__list">
-                                        <ul *ngFor="let skill of projects.projectSkills" >
-                                            <li>{{ skill.skill }}</li>
+                                        <ul >
+                                            <li>JavaScript</li>
+                                            <li>MySQL</li>
+                                            <li>Node.js</li>
+                                            <li>Input Validation</li>
                                         </ul>
                                     </div>
     
     
                                     <div class="work__links">
-                                        <a [href]=projects.projectLink title="View Source Code" target="_blank">
+                                        <a href="https://github.com/j33s3/CS499/tree/main/Trucking_Database" title="View Source Code" target="_blank">
                                             <div class="work__code-wrapper">
                                                 <object data="../../../assets/images/github.svg" type="image/svg+xml" style="pointer-events: none;" class="work__code" alt="GitHub"></object>
                                             </div>
                                         </a>
                                     </div>
         
-                                    <a [href]="'/details/' + projects._id" class="more-btn">More Details</a>
+                                    <!-- <a [href]="'/details/' + projects._id" class="more-btn">More Details</a> -->
                                 </div>
         
                             </div>
                             <div class="work__picture">
-                                 <app-image-display [imageId]="projects._id" imageType="projects"></app-image-display>
+                                 <app-image-display imageId="../../../assets/images/School/Trucking_1" imageType="projects"></app-image-display>
                             </div>
                           </div>
-                     </div>
-                  </div>
+
+
+                        <div class="work__box">
+                            <div class="work__text">
+                                <h2>Inventory Management Mobile</h2>
+                                <div class="project">
+                                    <p class="project__description">An IMS android application for managing inventory and recieving alerts for low quantities</p>
+                                </div>
+        
+                                <div class="bottom__left-container">
+                                    <div class="work__list">
+                                        <ul >
+                                            <li>Java</li>
+                                            <li>Android</li>
+                                            <li>UI/UX</li>
+                                            <li>SQLite</li>
+                                            <li>XML</li>
+                                        </ul>
+                                    </div>
+    
+    
+                                    <div class="work__links">
+                                        <a href="https://github.com/j33s3/CS499/tree/main/IMS_App" title="View Source Code" target="_blank">
+                                            <div class="work__code-wrapper">
+                                                <object data="../../../assets/images/github.svg" type="image/svg+xml" style="pointer-events: none;" class="work__code" alt="GitHub"></object>
+                                            </div>
+                                        </a>
+                                    </div>
+        
+                                    <!-- <a [href]="'/details/' + projects._id" class="more-btn">More Details</a> -->
+                                </div>
+        
+                            </div>
+                            <div class="work__picture">
+                                 <app-image-display imageId="../../../assets/images/IMS_1" imageType="projects"></app-image-display>
+                            </div>
+                          </div>
+
+
+
+                        <div class="work__box">
+                            <div class="work__text">
+                                <h2>Data Structures & Algorithms Lab</h2>
+                                <div class="project">
+                                    <p class="project__description">Lab that tests the runtime complexity of merge, heap, and quick sort algorithms on vectors, linked-lists and hash tables</p>
+                                </div>
+        
+                                <div class="bottom__left-container">
+                                    <div class="work__list">
+                                        <ul >
+                                            <li>C++</li>
+                                            <li>CMAKE</li>
+                                            <li>LaTeX</li>
+                                            <li>DSA</li>
+                                        </ul>
+                                    </div>
+    
+    
+                                    <div class="work__links">
+                                        <a href="https://github.com/j33s3/CS499/tree/main/DSA_LAB" title="View Source Code" target="_blank">
+                                            <div class="work__code-wrapper">
+                                                <object data="../../../assets/images/github.svg" type="image/svg+xml" style="pointer-events: none;" class="work__code" alt="GitHub"></object>
+                                            </div>
+                                        </a>
+                                    </div>
+        
+                                    <!-- <a [href]="'/details/' + projects._id" class="more-btn">More Details</a> -->
+                                </div>
+        
+                            </div>
+                            <div class="work__picture">
+                                 <app-image-display imageId="../../../assets/images/School/DSA_1" imageType="projects"></app-image-display>
+                            </div>
+                          </div>
                  
                  
             </div>

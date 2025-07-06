@@ -7,10 +7,8 @@
                 <div class="row">
                     <h1>About Me</h1>
                             <div class="about__content">
-                                <div *ngIf="data else loading" class="about__text">
-                                    <p [innerHTML]="data.aboutDescription"></p>
+                                    <p innerHTML="Hello! My name is Jesse Peterson, and I was born and raised in the greater Seattle area. I attended Lake Washington Institute of Technology for high school. I finished high school with my Associates in Computer Science. From here I attended Southern New Hampshire University to further obtain my Bachelors of Computer Science. I am currently working towards my goals of becoming a Full-Stack Developer or Site-Reliability Engineer. I love to take on challenges that further my knowledge in Computer Science. Feel free to check out any of my projects on this website—I'm always excited to share my work!"></p>
                                     <a href="../../assets/files/Peterson, Jesse Resume.pdf" target="_blank" class="btn">My Resume</a>
-                                </div>
                                 <div class="about__photo-container">
                                     <app-image-display [imageId]="data._id" imageType="about"></app-image-display>
                                 </div>

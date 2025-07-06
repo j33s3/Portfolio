@@ -22,6 +22,7 @@
 </div> -->
 
 
+
 <body class="work">
     <div class="row">
         <div class="project-container">
@@ -30,12 +31,50 @@
                 <div *ngFor="let projects of data">
                 <div class="work__box">
                     <div class="work__text">
-                        <h2>{{ projects.projectName }}</h2>
+                        <h2>Portfolio Website</h2>
                         <div class="project">
-                            <p class="project__description">{{ projects.projectBriefing }}</p>
+                            <p class="project__description">This website that is created in Angular and hosted using AWS</p>
                         </div>
 
                         <div class="bottom__left-container">
+                            <div class="work__list">
+                                <ul >
+                                    <li>AWS</li>
+                                    <li>Angular</li>
+                                    <li>SCSS</li>
+                                    <li>Typescript</li>
+                                    <li>HTML</li>
+                                </ul>
+                            </div>
+
+
+                            <div class="work__links">
+                                <a href="https://github.com/j33s3/Portfolio" title="View Source Code" target="_blank">
+                                    <div class="work__code-wrapper">
+                                        <object data="../../../assets/images/github.svg" type="image/svg+xml" style="pointer-events: none;" class="work__code" alt="GitHub"></object>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <a [href]="'/details/' + projects._id" class="more-btn">More Details</a>
+                        </div>
+
+                    </div>
+                    <div class="work__picture">
+                        <app-image-display imageId="../../../assets/images/Personal/portfolio_1.png" imageType="projects"></app-image-display>
+                    </div>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+
+
+</body>
+
+
+
+                        <!-- <div class="bottom__left-container">
                             <div class="work__list">
                                 <ul *ngFor="let skill of projects.projectSkills" >
                                     <li>{{ skill.skill }}</li>
@@ -52,17 +91,4 @@
                             </div>
 
                             <a [href]="'/details/' + projects._id" class="more-btn">More Details</a>
-                        </div>
-
-                    </div>
-                    <div class="work__picture">
-                        <app-image-display [imageId]="projects._id" imageType="projects"></app-image-display>
-                    </div>
-                    </div>
-                </div>
-
-        </div>
-    </div>
-
-
-</body>
+                        </div> -->
