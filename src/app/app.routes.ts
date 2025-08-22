@@ -9,7 +9,10 @@ import { WorkPersonalComponent } from './work/work-personal/work-personal.compon
 import { WorkSchoolComponent } from './work/work-school/work-school.component';
 import { WorkWorkComponent } from './work/work-work/work-work.component';
 
-import { WorkDetailsComponent } from './work/work-details/work-details.component';
+import { DSADetailsComponent } from './work/work-details/DSA/work-details.component';
+import { IMSDetailsComponent } from './work/work-details/IMS/work-details.component';
+import { TruckingDBDetailsComponent } from './work/work-details/TruckingDB/work-details.component';
+import { PortfolioDetailsComponent } from './work/work-details/Portfolio/work-details.component';
 
 
 export const routes: Routes = [
@@ -23,6 +26,9 @@ export const routes: Routes = [
     { path: 'school', component: WorkSchoolComponent },
     { path: 'professional', component: WorkWorkComponent },
 
-    { path: 'details/:id', component: WorkDetailsComponent},
+    { path: 'details/DSA', component: DSADetailsComponent},
+    { path: 'details/IMS', component: IMSDetailsComponent},
+    { path: 'details/TruckingDB', component: TruckingDBDetailsComponent},
+    { path: 'details/Portfolio', component: PortfolioDetailsComponent},
 
 ];

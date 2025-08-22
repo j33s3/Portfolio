@@ -1,0 +1,165 @@
+.header {
+    background: linear-gradient(rgba(0,0,0, .1), rgba(0,0,0, 0.4)),   /*This creates a gradient overlay goiing from very light black at the top to darker at the bottom*/
+    url('../../../../assets/images/ProjectDetails.gif');
+    height: 65vh;
+    background-size: cover;
+    background-position: center;
+    background-position-y: -10rem;
+    background-attachment: fixed;
+    font-size: var(--font-size-normal);
+}
+
+.header__text-box {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding-top: 2rem;
+}
+
+.header__text h1 {
+    display: flex;
+    position: absolute;
+    font-family: Roboto, 'Jost', sans-serif;
+    font-size: var(--font-size-huge);
+    line-height: 140%;
+
+    // Positioning
+    top: 25%;
+    transform: translateY(-75%);
+
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+
+
+/*  BODY for projects  */
+body{
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    width: 100%;
+}
+
+
+.project__header-box {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    overflow-y: hidden;
+
+}
+
+.project__header-image {
+    align-items: center;
+    justify-content: center;
+    max-width: 900px;
+    max-height: 700px;
+}
+
+.project__header-box p{
+    margin-top: 2rem;
+}
+
+
+.status__box {
+    display: flex;
+    flex: 1;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 0 5rem 0;
+    overflow-y: hidden;
+}
+
+.status__picture {
+    display: block;
+    height: auto;
+    max-width: 800px;
+    max-height: 700px;
+    padding-bottom: 4rem;
+}
+
+
+
+
+.status__text {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+.status__title {
+    width: 100%;
+    text-align: left;
+    font-size: var(--font-size-medium);
+}
+
+
+.status__description {
+    width: 90%;
+    text-align: left;
+    line-height: 120%;
+}
+
+
+
+
+
+
+
+
+
+
+/* Scaling Components */
+
+
+// for pictures / inner text
+@media(max-width: 1100px) {
+    .status__picture {
+        max-width: 600px;
+    }
+    .project__header-box img {
+        max-width: 700px;
+    }
+}
+
+@media(max-width: 850px) {
+    .status__picture {
+        max-width: 400px;
+    }
+    .project__header-box img {
+        max-width: 500px;
+    }
+}
+
+@media(max-width: 600px) {
+    .status__picture {
+        max-width: 350px;
+    }
+    .project__header-box img {
+        max-width: 400px;
+    }
+    .status__text {
+        font-size: var(--font-size-small);
+    }
+}
+
+// for heading text
+@media(max-width: 1000px) {                                                /*If screen width is less than 500px align the text to the center*/
+    .header__text h1{
+        font-size: 7rem;
+    }
+}
+@media(max-width: 800px) {                                                /*If screen width is less than 500px align the text to the center*/
+    .header__text h1{
+        font-size: 6rem;
+    }
+}
+@media(max-width: 500px) {                                                /*If screen width is less than 500px align the text to the center*/
+    .header__text h1{
+        font-size: 5rem;
+    }
+}

@@ -28,7 +28,6 @@
         <div class="project-container">
 
                 <!-- All Projects -->
-                <div *ngFor="let projects of data">
                 <div class="work__box">
                     <div class="work__text">
                         <h2>Portfolio Website</h2>
@@ -55,14 +54,12 @@
                                     </div>
                                 </a>
                             </div>
-
-                            <a [href]="'/details/' + projects._id" class="more-btn">More Details</a>
+                                <a href="/details/Portfolio" class="more-btn">More Details</a>
                         </div>
 
                     </div>
                     <div class="work__picture">
-                        <app-image-display imageId="../../../assets/images/Personal/portfolio_1.png" imageType="projects"></app-image-display>
-                    </div>
+                        <img src="../../../assets/images/Personal/portfolio_1.png"/>
                     </div>
                 </div>
 
