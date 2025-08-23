@@ -4,14 +4,14 @@
     </nav>
 
     <div class="header__text-box row">
-        <div *ngIf="project else loading" class="header__text">
+        <div class="header__text">
             <h1>
-                <span> {{ project.projectName }} </span>
+                <span>Data Structures & Algorithms Lab</span>
             </h1>
         </div>
     </div>
 
-    
+
 </header>
 
 
@@ -23,27 +23,140 @@
 
             <!-- Head project image and description -->
             <section>
-                <div *ngIf="project else loading" class="project__header-box">
-                    <img *ngIf="images?.has(project._id)" [src]="images.get(projectId)" class="project__header-image">
-                    <p [innerHTML]="project.projectDescription"></p>
+                <div class="project__header-box">
+                    <img src="../../../../assets/images/School/DSA_1.png" class="project__header-image">
+                    <p class="status__description">
+                        This lab consisted of three data structures, Vectors, Linked Lists, and Hash Tables.
+                        Each data structure was populated with 12,000 different documents from a .CSV file.
+                        Three different sorting algorithms were tested on each data structure, Merge, Heap, and Quick
+                        sort.
+                    </p>
+                    <p class="status__description">
+
+                        The consensus for the fastest data structure to sort was the Hash Table in all trials.
+                        The fastest algorithm for sorting was a mix between the merge and quick sorts. With the merge
+                        sort
+                        performing fastest on the Linked List and Hash Tables
+                    </p>
+                    <p class="status__description">
+                        That the work performed on these Data Structures was not satisfactory enough; I wanted to study
+                        them more.
+                        I chose to add this in my capstone to get more practice with DSA but also to showcase my
+                        abilities to work
+                        with different data structures and incorporate sorting algorithms for them. Through these tests
+                        I learned just
+                        how complex this topic can get, especially when constructing the data structures, as in this
+                        project.
+                    </p>
                 </div>
             </section>
 
             <!-- For Status image and description -->
-             <div *ngIf="project; else loading">
-                <div *ngFor="let item of project.projectStatuses">
-                    <div class="status__box">
-                        <div class="status__text">
-                            <h3 class="status__title">{{item.statusName}}</h3>
-                            <span class="status__description" [innerHTML]="item.statusDescription"></span>
-                        </div>
-    
-                        <div class="status__picture">
-                            <img *ngIf="images?.has(project._id + '_' + item._id)" [src]="images.get(project._id + '_' + item._id) " class="status__picture">
-                        </div>
-                    </div>
+            <div class="status__box">
+                <div class="status__text">
+                    <h3 class="status__title">Assessing the artifact</h3>
+                    <span class="status__description">
+                        In this enhancement, I wanted to further my knowledge from my data structures and
+                        algorithms class.
+                        In this class, we did not have a final project that dealt with programming data structures.
+                        I chose to take 3 different assignments that dealt with different data structures. Specifically,
+                        vectors, linked lists, and hash table.
+                        Originally, I wanted to compare the binary search tree, but I then remembered that the data is
+                        sorted upon entry.
+                    </span>
+                    <span class="status__description">
+
+                        For this enhancement, I chose to take all three of the data structures and their files
+                        and insert them into one folder.
+                        After this, I made a main.js for managing user input via the terminal.
+                    </span>
                 </div>
-             </div>
+
+                <div class="status__picture">
+                    <img src="../../../../assets/images/School/DSA_2.png" class="status__picture">
+                </div>
+            </div>
+
+            <div class="status__box">
+                <div class="status__text">
+                    <h3 class="status__title">Creating the sorting algorithms</h3>
+                    <span class="status__description">
+                        After combining the files for the application. I needed to create sorting algorithms for
+                        each of the data structures.
+                        This was simple for the vector and linked list. However, when it came to the hash table, it got
+                        slightly complicated.
+                        The way that I dealt with collisions in the table was by placing them into a linked list.
+                        Therefore, each index of the hash table had a head node, if another item came in with the same
+                        node it would be placed after.
+                        With the sorting algorithms, I needed to sort each of these linked-list-like structures
+                    </span>
+                </div>
+
+                <div class="status__picture">
+                    <img src="../../../../assets/images/School/DSA_3.png" class="status__picture">
+                </div>
+            </div>
+
+            <div class="status__box">
+                <div class="status__text">
+                    <h3 class="status__title">Slight detour for Cmake</h3>
+                    <span class="status__description">
+                        At this point in the project, I was realizing just how long it would take for me to
+                        recompile everything in between tests.
+                        There were far too many files to type out (g++ Wall -O etc. etc.). That's where I learned how
+                        CMake could help me with this problem.
+                        Through this I was able to specify everything in my cmake.txt files and use CMake and Make, then
+                        my project was ready to go.
+                    </span>
+                </div>
+
+                <div class="status__picture">
+                    <img src="../../../../assets/images/School/DSA_4.png" class="status__picture">
+                </div>
+            </div>
+
+            <div class="status__box">
+                <div class="status__text">
+                    <h3 class="status__title">Testing and recording</h3>
+                    <span class="status__description">
+                        Once the algorithms had been created for each data structure.
+                        It was time to implement a counter that would count the number of ticks elapsed over the sort. I
+                        accomplished this by using the Clock class.
+                        I would do this by initializing a clock before with the time, then after sorting I would
+                        initialize a new clock and subtract the time from before.
+                        This would give me the proper time elapsed in ticks.
+                    </span>
+                </div>
+
+                <div class="status__picture">
+                    <img src="../../../../assets/images/School/DSA_5.png" class="status__picture">
+                </div>
+            </div>
+
+            <div class="status__box">
+                <div class="status__text">
+                    <h3 class="status__title">Finishing touches</h3>
+                    <span class="status__description">
+                        Now that I had recorded all the data I needed, it was time to report on it. I could have
+                        just used Google sheets or Excel.
+                        However, I remembered using LaTeX in my linear algebra class and wanted a refresher on how to
+                        use it. I decided to make a bar graph to represent the data.
+                    </span>
+                    <span class="status__description">
+
+                        In the end, the vector was by FAR the slowest data structure for sorting. This has
+                        surprised me since I thought the linked list would be close.
+                        On average, the vector took ~0.09 seconds to sort, the linked list ~0.075 and the hash table
+                        ~0.025. In fact,
+                        I was surprised the hash table had a very consistent runtime across all three sorting
+                        algorithms.
+                    </span>
+                </div>
+
+                <div class="status__picture">
+                    <img src="../../../../assets/images/School/DSA_6.png" class="status__picture">
+                </div>
+            </div>
 
 
 
@@ -54,8 +167,4 @@
 
 <ng-template #loading>
     <p>Loading project details...</p>
-  </ng-template>
-
-
-
-
+</ng-template>

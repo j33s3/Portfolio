@@ -4,18 +4,15 @@
     </nav>
 
     <div class="header__text-box row">
-        <div *ngIf="project else loading" class="header__text">
+        <div class="header__text">
             <h1>
-                <span> {{ project.projectName }} </span>
+                <span>Trucking Document Server</span>
             </h1>
         </div>
     </div>
 
-    
+
 </header>
-
-
-
 
 <body class="work">
     <div class="row">
@@ -23,39 +20,169 @@
 
             <!-- Head project image and description -->
             <section>
-                <div *ngIf="project else loading" class="project__header-box">
-                    <img *ngIf="images?.has(project._id)" [src]="images.get(projectId)" class="project__header-image">
-                    <p [innerHTML]="project.projectDescription"></p>
+                <div class="project__header-box">
+                    <img src="../../../../assets/images/School/Trucking_1.png" class="project__header-image">
+                    <p class="status__description">
+                        This application is a Command Line Interface for interacting with a MySQL database.
+                        The operations available to the user are adding, viewing, and deleting documents.
+                        The documents hold information like the truck driver ID, name, truck make/model/year,
+                        and their beginning and destination locations.
+                    </p>
+                    <p class="status__description">
+                        This program runs using Node.js and uses the node Commander package for the addition of
+                        new commands.
+                        Then the inquirer/prompts package is used for interacting with the user for retrieving
+                        information.
+                        Inquirer is also used to validate the incoming information, ensuring no malicious data is being
+                        passed.
+                    </p>
+                    <p class="status__description">
+                        The concepts of this lab were originally introduced to me in my DAD220 class in September
+                        2023.
+                        The work in that class was merely working with MySQL using the terminal interface. I wanted to
+                        learn
+                        how to manage a MySQL database using a programming language. I chose to incorporate this project
+                        in my
+                        capstone to learn more about MySQL and Node.js. This enhancement showcases my ability to work
+                        with databases
+                        and even to enforce security measures that prevent SQL Injection attacks. During my development
+                        of this project
+                        I learned how to read JSON data from an API, use libraries for executing commands, receiving
+                        user input, and limiting characters.
+                        I encounter many issues when trying to extract city, and state info from a zip code. I finally
+                        found the issue that was due to
+                        the asynchronous functionality of JavaScript.
+                    </p>
                 </div>
             </section>
 
             <!-- For Status image and description -->
-             <div *ngIf="project; else loading">
-                <div *ngFor="let item of project.projectStatuses">
-                    <div class="status__box">
-                        <div class="status__text">
-                            <h3 class="status__title">{{item.statusName}}</h3>
-                            <span class="status__description" [innerHTML]="item.statusDescription"></span>
-                        </div>
-    
-                        <div class="status__picture">
-                            <img *ngIf="images?.has(project._id + '_' + item._id)" [src]="images.get(project._id + '_' + item._id) " class="status__picture">
-                        </div>
-                    </div>
+            <div class="status__box">
+                <div class="status__text">
+                    <h3 class="status__title">Assessing the artifact</h3>
+                    <span class="status__description">
+                        I chose this database project because I wanted to get more practice with
+                        MySQL. My
+                        first
+                        step was to assess what the
+                        original projects were. In this initial project, we had a document where we posted images of us
+                        executing various operations on an RMA database.
+                        We performed all of these commands through the MySQL's CLI rather than crafting programmatic
+                        queries. Our main goal for this project was
+                        to showcase our ability to look up information for analyzing what it represented. Our queries
+                        had to be methodical as to limit noise in the data sets.
+                    </span>
+                    <span class="status__description">
+                        This brings me to the enhancement of this project. My goal with this was to take the
+                        knowledge I learned and create a command line interface to manage data of my own.
+                        I wanted to learn how to create queries in JavaScript so that I can use a command manager to
+                        easily create, read, update, and delete items.
+                    </span>
                 </div>
-             </div>
 
+                <div class="status__picture">
+                    <img src="../../../../assets/images/School/Trucking_2.png" class="status__picture">
+                </div>
+            </div>
 
+            <div class="status__box">
+                <div class="status__text">
+                    <h3 class="status__title">Creating Test Queries</h3>
+                    <span class="status__description">
+                        The first step I took in this enhancement was to ensure that I can write each of the
+                        commands that I will be using. More importantly,
+                        I needed to ensure that my program was connecting to the database and properly working. I ran
+                        into problems initially with the DB,
+                        this was due to the fact that my Linux distro (Arch) has its own version of MySQL. This was
+                        called MariaDB,
+                        Luckily it worked exactly the same. Eventually I created this file that handled the connection
+                        to the database for each of my commands.
+                    </span>
+                </div>
+
+                <div class="status__picture">
+                    <img src="../../../../assets/images/School/Trucking_3.png" class="status__picture">
+                </div>
+            </div>
+
+            <div class="status__box">
+                <div class="status__text">
+                    <h3 class="status__title">Making Commands and User Input</h3>
+                    <span class="status__description">
+                        Once I set up the DB connecting, I needed to start working on the user experience. For
+                        this, I found two node packages, Commander and Prompts from Inquirer.
+                        Commander was crucial for creating the proper command experience, this allowed me to string
+                        together my commands.
+                        For my base command I never went further than using ./run.sh but afterward you select an action
+                        (add, delete, search and view routes).
+                        Commander was helpful for organizing my commands and also made it easy to make a '-help' flag.
+                        The second package, inquirer/prompts, was beneficial for inquiring data from the user.
+                        This package also became helpful for implementing my input validation I mentioned earlier.
+                    </span>
+                </div>
+
+                <div class="status__picture">
+                    <img src="../../../../assets/images/School/Trucking_4.png" class="status__picture">
+                </div>
+            </div>
+
+            <div class="status__box">
+                <div class="status__text">
+                    <h3 class="status__title">Validating User input</h3>
+                    <span class="status__description">
+                        Next, I wanted to make the command line experience as you would expect it, with input
+                        validation.
+                        Nobody wants to run a command that returns errors rather than messages explaining the
+                        discrepancies. First, I placed character limits on each of the fields.
+                        For the driver name, I only allowed alphabetical characters. The vehicle make had to be
+                        alphanumeric, the model needed to consist of one of the existing brands.
+                        The truck year had to be a number that was after 1900 and less than 1+ the current year.
+                        Lastly, the zip code had to be a valid zip code, I will talk more about how I managed this
+                        below.
+                    </span>
+                </div>
+
+                <div class="status__picture">
+                    <img src="../../../../assets/images/School/Trucking_5.png" class="status__picture">
+                </div>
+            </div>
+
+            <div class="status__box">
+                <div class="status__text">
+                    <h3 class="status__title">Implementing Zippopotam</h3>
+                    <span class="status__description">
+                        &emsp; Authenticating the zip codes was a fun system to have tinkered with. For this, I used an
+                        API called Zippopotam.
+                        Through this, I was able to call a URL and attach the entered zip code to the end.
+                        The API told me if the zip code was valid, if it was then also the name of the city and the
+                        state abbreviation.
+                        For example, here is what the URL looks like, https://api/zippopotam.us/us/zipcode.
+                        I used the data that it returned to populate the database with a clean format (City, State Abr,
+                        ZIP).
+                    </span>
+                </div>
+
+                <div class="status__picture">
+                    <img src="../../../../assets/images/School/Trucking_6.png" class="status__picture">
+                </div>
+            </div>
+
+            <div class="status__box">
+                <div class="status__text">
+                    <h3 class="status__title">Connecting the Database</h3>
+                    <span class="status__description">
+                        Finally, I needed to connect each of the commands to the database to execute their
+                        functionality.
+                        I was able to call the class I mentioned earlier for establishing the DB connection.
+                        From here I was able to send my requests to the database.
+                    </span>
+                </div>
+
+                <div class="status__picture">
+                    <img src="../../../../assets/images/School/Trucking_7.png" class="status__picture">
+                </div>
+            </div>
 
         </div>
     </div>
 </body>
-
-
-<ng-template #loading>
-    <p>Loading project details...</p>
-  </ng-template>
-
-
-
-

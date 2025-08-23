@@ -1,6 +1,7 @@
 .header {
-    background: linear-gradient(rgba(0,0,0, .1), rgba(0,0,0, 0.4)),   /*This creates a gradient overlay goiing from very light black at the top to darker at the bottom*/
-    url('../../../assets/images/ProjectDetails.gif');
+    background: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, 0.4)),
+        /*This creates a gradient overlay goiing from very light black at the top to darker at the bottom*/
+        url('../../../../assets/images/ProjectDetails.gif');
     height: 65vh;
     background-size: cover;
     background-position: center;
@@ -35,7 +36,7 @@
 
 
 /*  BODY for projects  */
-body{
+body {
     justify-content: center;
     align-items: center;
     height: fit-content;
@@ -58,7 +59,7 @@ body{
     max-height: 700px;
 }
 
-.project__header-box p{
+.project__header-box p {
     margin-top: 2rem;
 }
 
@@ -99,6 +100,8 @@ body{
 
 
 .status__description {
+    display: block;
+    text-indent: 2em;
     width: 90%;
     text-align: left;
     line-height: 120%;
@@ -121,6 +124,7 @@ body{
     .status__picture {
         max-width: 600px;
     }
+
     .project__header-box img {
         max-width: 700px;
     }
@@ -130,6 +134,7 @@ body{
     .status__picture {
         max-width: 400px;
     }
+
     .project__header-box img {
         max-width: 500px;
     }
@@ -139,27 +144,37 @@ body{
     .status__picture {
         max-width: 350px;
     }
+
     .project__header-box img {
         max-width: 400px;
     }
+
     .status__text {
         font-size: var(--font-size-small);
     }
 }
 
 // for heading text
-@media(max-width: 1000px) {                                                /*If screen width is less than 500px align the text to the center*/
-    .header__text h1{
+@media(max-width: 1000px) {
+
+    /*If screen width is less than 500px align the text to the center*/
+    .header__text h1 {
         font-size: 7rem;
     }
 }
-@media(max-width: 800px) {                                                /*If screen width is less than 500px align the text to the center*/
-    .header__text h1{
+
+@media(max-width: 800px) {
+
+    /*If screen width is less than 500px align the text to the center*/
+    .header__text h1 {
         font-size: 6rem;
     }
 }
-@media(max-width: 500px) {                                                /*If screen width is less than 500px align the text to the center*/
-    .header__text h1{
+
+@media(max-width: 500px) {
+
+    /*If screen width is less than 500px align the text to the center*/
+    .header__text h1 {
         font-size: 5rem;
     }
 }

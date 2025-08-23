@@ -4,14 +4,14 @@
     </nav>
 
     <div class="header__text-box row">
-        <div *ngIf="project else loading" class="header__text">
+        <div class="header__text">
             <h1>
-                <span> {{ project.projectName }} </span>
+                <span>Inventory Management Mobile</span>
             </h1>
         </div>
     </div>
 
-    
+
 </header>
 
 
@@ -23,29 +23,139 @@
 
             <!-- Head project image and description -->
             <section>
-                <div *ngIf="project else loading" class="project__header-box">
-                    <img *ngIf="images?.has(project._id)" [src]="images.get(projectId)" class="project__header-image">
-                    <p [innerHTML]="project.projectDescription"></p>
+                <div class="project__header-box">
+                    <img src="../../../../assets/images/School/IMS_1.png" class="project__header-image">
+                    <p class="status__description">
+                        This Android application features a user login with basic authentication. The app uses
+                        SQLite
+                        to track users and inventory. Once signed in users can add, subtract or remove inventory items.
+                        When
+                        a users selects add item, a screen prompting for an item name and quantity will appear.
+                    </p>
+                    <p class="status__description">
+                        This app also features SMS notifications for alerts when an item reaches a specified
+                        quantity. Optionally,
+                        Users can receive alerts when an item is deleted as well. Lastly, the app features two themes,
+                        light and dark mode.
+                    </p>
+                    <p class="status__description">
+                        This app was originally created in my CS360 class in August 2024. I chose to incorporate
+                        this
+                        as a part of my capstone because it showcases my ability to work in UI/UX, it also shows my
+                        ability
+                        to work in mobile development. When working through this application, I learned
+                        how to create universal themes in an android app, I also learned how to store and handle user
+                        settings.
+                    </p>
                 </div>
             </section>
 
             <!-- For Status image and description -->
-             <div *ngIf="project; else loading">
-                <div *ngFor="let item of project.projectStatuses">
-                    <div class="status__box">
-                        <div class="status__text">
-                            <h3 class="status__title">{{item.statusName}}</h3>
-                            <span class="status__description" [innerHTML]="item.statusDescription"></span>
-                        </div>
-    
-                        <div class="status__picture">
-                            <img *ngIf="images?.has(project._id + '_' + item._id)" [src]="images.get(project._id + '_' + item._id) " class="status__picture">
-                        </div>
-                    </div>
+            <div class="status__box">
+                <div class="status__text">
+                    <h3 class="status__title">Assessing the artifact</h3>
+                    <span class="status__description">
+                        In the original project from this artifact, we had to create an android application.
+                        This application needed to have a log in screen, utilize the SQLite database, and send SMS
+                        messages to users.
+                        For this application, I chose to create an inventory management system, that sends notifications
+                        when an item quantity reaches zero.
+                    </span>
+                    <span class="status__description">
+                        In this enhancement, I wanted to further my understanding of SQLite, UI/UX, and input
+                        validation.
+                        My plan to accomplish this goal was to create a user table in the database and add more
+                        settings.
+                        Further, wherever a user can send data to the application, I want to validate data.
+                    </span>
                 </div>
-             </div>
 
+                <div class="status__picture">
+                    <img src="../../../../assets/images/School/IMS_2.png" class="status__picture">
+                </div>
+            </div>
 
+            <div class="status__box">
+                <div class="status__text">
+                    <h3 class="status__title">Creating the Settings Screen</h3>
+                    <span class="status__description">
+                        My first step in enhancing this project is to add a discrete settings screen.
+                        Previously, we only had a button for enabling SMS notifications through Android settings.
+                        For this, I replaced the SMS button with a gear.
+                        This gear would take you to a new screen where you will be able to change your theme,
+                        enable SMS, turn on SMS upon deletion and set your alert quantity.
+                        After completing this screen, I soon noticed that my next step is to create the user table in
+                        SQLite.
+                        I needed somewhere to save the settings when the app is not in operation.
+                    </span>
+                </div>
+
+                <div class="status__picture">
+                    <img src="../../../../assets/images/School/IMS_3.png" class="status__picture">
+                </div>
+            </div>
+
+            <div class="status__box">
+                <div class="status__text">
+                    <h3 class="status__title">Creating the User Table</h3>
+                    <span class="status__description">
+                        My next step is to create a new SQLite table for storing the user information.
+                        Since this is a small-scale application, I didn't make it too complex.
+                        The user table stores the username, password, and each of the settings mentioned previously.
+                        This was helpful for enhancing the login and create account system that the app has.
+                        Previously there was only one user verified by the system, now you can create one!
+                    </span>
+                </div>
+
+                <div class="status__picture">
+                    <img src="../../../../assets/images/School/IMS_4.png" class="status__picture">
+                </div>
+            </div>
+
+            <div class="status__box">
+                <div class="status__text">
+                    <h3 class="status__title">Creating the Light Theme</h3>
+                    <span class="status__description">
+                        Now that all the underlying structure was finished, it was time to work on another
+                        section of the project,
+                        the light theme. For this I wanted to follow some very simple guidelines, the black background
+                        would become white,
+                        and the text would become black. This kept the secondary color as a consistent green color.
+                        I had many issues with implementing the theme, I tried to use Androids theme folder, but it was
+                        having issues overriding all the other data.
+                        I eventually got it working, but it wasn't as nice as I would like. If I was to go back, I would
+                        develop the UI with the theme in mind,
+                        this way I can take full advantage of Android's theme organizing.
+                    </span>
+                </div>
+
+                <div class="status__picture">
+                    <img src="../../../../assets/images/School/IMS_5.png" class="status__picture">
+                </div>
+            </div>
+
+            <div class="status__box">
+                <div class="status__text">
+                    <h3 class="status__title">Wrapping up and Testing</h3>
+                    <span class="status__description">
+                        Now that all the enhancements are complete, it is time to test that everything is working
+                        as promised.
+                        For this test, I wanted to take it a step further and ensure that the app worked on multiple
+                        Android versions.
+                        For this I tested the app on API versions 25 to 35. I found that the versions 25 and 26 did not,
+                        but every other version worked as expected. To conduct the tests, I would launch the
+                        application,
+                        create an account, add items, enable SMS, change settings and then kill the app.
+                        I wanted to test if the settings would change after relaunching.
+                        Further, I tested if SMS would send an alert at my desired quantity and if it would alert on
+                        deletion.
+                    </span>
+                </div>
+
+                <div class="status__picture">
+                    <img src="../../../../assets/images/School/IMS_6.png" class="status__picture">
+                </div>
+            </div>
 
         </div>
     </div>
@@ -54,8 +164,4 @@
 
 <ng-template #loading>
     <p>Loading project details...</p>
-  </ng-template>
-
-
-
-
+</ng-template>
