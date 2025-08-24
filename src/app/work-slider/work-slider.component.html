@@ -1,16 +1,35 @@
 <div class="slider__container">
-    <div *ngIf="images.length > 0; else loading">
-        <div class="work-slider">
-            <div *ngFor="let image of images" 
-                    [ngStyle]="{ transform: 'translateX(' + offset + '%)'}"
-                    (mouseenter)="pauseSlider()"
-                    (mouseleave)="resumeSlider()">
-                    <a  [href]="'/details/' + image.ID" class="full-link">
-                        <app-image-display [imageId]="image.ID" imageType="projects" [importStyle]="{ 'border-radius': '15px'}" ></app-image-display>
-                        <div class="overlay-text">{{ image.Name }}</div>
-                    </a>
-    
-            </div>
+    <div class="work-slider">
+        <div [ngStyle]="{ transform: 'translateX(' + offset + '%)'}" (mouseenter)="pauseSlider()"
+            (mouseleave)="resumeSlider()">
+            <a href="/details/IMS" class="full-link">
+                <img src="../../assets/images/School/IMS_1.png" style="border-radius: 15px;" />
+                <div class="overlay-text">Iventory Mangement Mobile</div>
+            </a>
+            <a href="/details/DSA" class="full-link">
+                <img src="../../assets/images/School/DSA_1.png" style="border-radius: 15px;" />
+                <div class="overlay-text">Data Structures & Algorithms Lab</div>
+            </a>
+            <a href="/details/TruckingDB" class="full-link">
+                <img src="../../assets/images/School/Trucking_1.png" style="border-radius: 15px;" />
+                <div class="overlay-text">Trucking Document Server</div>
+            </a>
+            <a href="/details/portfolio" class="full-link">
+                <img src="../../assets/images/Personal/portfolio_1.png" style="border-radius: 15px;" />
+                <div class="overlay-text">Portfolio Website</div>
+            </a>
+            <a href="/details/IMS" class="full-link">
+                <img src="../../assets/images/School/IMS_1.png" style="border-radius: 15px;" />
+                <div class="overlay-text">Iventory Mangement Mobile</div>
+            </a>
+            <a href="/details/DSA" class="full-link">
+                <img src="../../assets/images/School/DSA_1.png" style="border-radius: 15px;" />
+                <div class="overlay-text">Data Structures & Algorithms Lab</div>
+            </a>
+            <a href="/details/TruckingDB" class="full-link">
+                <img src="../../assets/images/School/Trucking_1.png" style="border-radius: 15px;" />
+                <div class="overlay-text">Trucking Document Server</div>
+            </a>
         </div>
     </div>
 </div>
@@ -19,4 +38,3 @@
 <ng-template #loading>
     <p style="font-size: 2.5rem;">Loading project details...</p>
 </ng-template>
-

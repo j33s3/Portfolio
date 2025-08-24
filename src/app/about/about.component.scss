@@ -1,11 +1,14 @@
-
-.about html, body { 
+.about html,
+body {
     height: 100%;
     overflow-x: hidden;
 }
+
 .about body {
-    background: radial-gradient(rgba(73,72,67, 1) 0%,                     /*Defines two of the same colors one is occupying the center and the other extends 35% of the radius*/
-    rgba(70,69,63, 1) 35%, #212121 100%)                                /*Third sets the final color. 100% means that is will occupy the edges*/
+    background: radial-gradient(rgba(73, 72, 67, 1) 0%,
+            /*Defines two of the same colors one is occupying the center and the other extends 35% of the radius*/
+            rgba(70, 69, 63, 1) 35%, #212121 100%)
+        /*Third sets the final color. 100% means that is will occupy the edges*/
 }
 
 .about h1 {
@@ -16,11 +19,10 @@
 .about__content {
     display: flex;
     position: relative;
-    flex-direction:row-reverse;
+    flex-direction: row-reverse;
     align-items: center;
     z-index: 10;
 }
-
 
 @media(max-width: 900px) {
     .about__content {
@@ -33,7 +35,8 @@
     .about__content {
         padding-top: 5%;
     }
-    .about h1 { 
+
+    .about h1 {
         padding-top: 10%
     }
 }
@@ -50,16 +53,26 @@
     line-height: 150%;
 }
 
+.about__description {
+    display: block;
+    text-indent: 2em;
+
+}
+
+
 
 
 @media(min-width: 901px) {
     .about__text {
-        flex: 0 0 50%                                                     /* container will not grow with excess space and not shrink if there isnt enough, item is set to 35% */
+        flex: 0 0 50%
+            /* container will not grow with excess space and not shrink if there isnt enough, item is set to 35% */
     }
-    
+
     .about__photo-container {
-        flex: 1;                                                            /* picture will grow and shrink and the initial size of the item is 0% */
-        margin: 0 var(--gutter-huge) 0 0;                                   /* Top, Right, Bottom, Left*/
+        flex: 1;
+        /* picture will grow and shrink and the initial size of the item is 0% */
+        margin: 0 var(--gutter-huge) 0 0;
+        /* Top, Right, Bottom, Left*/
     }
 }
 
@@ -68,7 +81,7 @@
 
 .ocean {
     height: 50vh;
-    width: 100vw;                                                            
+    width: 100vw;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -81,7 +94,7 @@
     background: url("../../assets/images/wave.svg");
     background-repeat: repeat-x;
     position: absolute;
-    width: 6400px; 
+    width: 6400px;
     bottom: 0;
     left: 0;
     height: 198px;
@@ -106,9 +119,11 @@
     .wave {
         bottom: 250px;
     }
+
     .wave.wave:nth-of-type(2) {
         bottom: 200px;
     }
+
     .wave.wave:nth-of-type(3) {
         bottom: 150px;
     }
@@ -116,14 +131,22 @@
 }
 
 @keyframes wave {
-    0% { margin-left: 0; }
-    100% { margin-left: -1600px; }
+    0% {
+        margin-left: 0;
+    }
+
+    100% {
+        margin-left: -1600px;
+    }
 }
 
 @keyframes swell {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translate(0, -30px);
     }
+
     50% {
         transform: translate(0, 50px);
     }

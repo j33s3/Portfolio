@@ -1,27 +1,45 @@
 <html class="about">
-    <body class="about">
-        <nav>
-            <app-navbar></app-navbar>
-        </nav>
 
-                <div class="row">
-                    <h1>About Me</h1>
-                            <div class="about__content">
-                                    <p innerHTML="Hello! My name is Jesse Peterson, and I was born and raised in the greater Seattle area. I attended Lake Washington Institute of Technology for high school. I finished high school with my Associates in Computer Science. From here I attended Southern New Hampshire University to further obtain my Bachelors of Computer Science. I am currently working towards my goals of becoming a Full-Stack Developer or Site-Reliability Engineer. I love to take on challenges that further my knowledge in Computer Science. Feel free to check out any of my projects on this website—I'm always excited to share my work!"></p>
-                                    <a href="../../assets/files/Peterson, Jesse Resume.pdf" target="_blank" class="btn">My Resume</a>
-                                <div class="about__photo-container">
-                                    <app-image-display [imageId]="data._id" imageType="about"></app-image-display>
-                                </div>
-                            </div>
-                    </div>
+<body class="about">
+    <nav>
+        <app-navbar></app-navbar>
+    </nav>
 
+    <div class="row">
+        <h1>About Me</h1>
+        <div class="about__content">
+            <div class="about__text">
+                <p class="about__description">
+                    <b>Hello!</b> My name is Jesse Peterson, and I was born and raised in the greater Seattle area.
+                    I attended Lake Washington Institute of Technology for high school.
+                    I finished high school with my Associates in Computer Science.
+                    From here I attended Southern New Hampshire University to further obtain my Bachelors of Computer
+                    Science.
+                </p>
+                <p class="about__description">
+                    I am currently working towards my goals of becoming a <b>Full-Stack Developer</b> or
+                    <b>Site-Reliability Engineer</b>.
+                    I love to take on challenges that further my knowledge in Computer Science.
+                    Feel free to check out any of my projects on this website—I'm always excited to share my work!
+                </p>
 
-        <div class="ocean">
-            <div class="wave"></div>
-            <div class="wave wave2"></div>
-            <div class="wave wave3"></div>
+                <a href="../../assets/files/Peterson, Jesse Resume.pdf" target="_blank" class="btn">My Resume</a>
+            </div>
+
+            <div class="about__photo-container">
+                <img src="../../assets/images/About/me.jpg">
+            </div>
         </div>
-    </body>
+    </div>
+
+
+    <div class="ocean">
+        <div class="wave"></div>
+        <div class="wave wave2"></div>
+        <div class="wave wave3"></div>
+    </div>
+</body>
+
 </html>
 
 
