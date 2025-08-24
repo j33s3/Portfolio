@@ -20,6 +20,12 @@
     z-index: 1;
 }
 
+.work-slider > div {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
 
 @keyframes slide {
     0% {
