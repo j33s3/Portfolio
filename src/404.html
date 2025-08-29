@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Redirecting...</title>
+    <script type="text/javascript">
+        // Remove the base href ("/Portfolio") and redirect to index.html with hash
+        const redirectTo = '/Portfolio/index.html';
+        const currentPath = location.pathname.replace('/Portfolio', '');
+        location.replace(redirectTo + '#!' + currentPath + location.search + location.hash);
+    </script>
+</head>
+
+<body>
+    Redirecting...
+</body>
+
+</html>
