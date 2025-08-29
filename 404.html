@@ -5,10 +5,11 @@
     <meta charset="UTF-8" />
     <title>Redirecting...</title>
     <script type="text/javascript">
-        // Remove the base href ("/Portfolio") and redirect to index.html with hash
-        const redirectTo = '/Portfolio/index.html';
-        const currentPath = location.pathname.replace('/Portfolio', '');
-        location.replace(redirectTo + '#!' + currentPath + location.search + location.hash);
+        // This will redirect from /Portfolio/school to /Portfolio/index.html with the path as a hash
+        const base = '/Portfolio';
+        const fullPath = location.pathname + location.search + location.hash;
+        const redirectTo = base + '/index.html#' + fullPath.replace(base, '');
+        location.replace(redirectTo);
     </script>
 </head>
 
